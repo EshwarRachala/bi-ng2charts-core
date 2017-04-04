@@ -1,23 +1,20 @@
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { SharedComponent } from './src/shared.component';
-import { SharedModule } from './src/shared.module';
-var ChartsModule = (function () {
-    function ChartsModule() {
+var SharedModule = (function () {
+    function SharedModule() {
     }
-    return ChartsModule;
+    return SharedModule;
 }());
-export { ChartsModule };
-ChartsModule.decorators = [
+export { SharedModule };
+SharedModule.decorators = [
     { type: NgModule, args: [{
-                declarations: [
-                    SharedComponent, SharedModule
+                imports: [CommonModule],
+                exports: [
+                    CommonModule, SharedComponent,
                 ],
-                imports: [
-                    SharedModule
-                ],
-                exports: [SharedComponent,
-                    SharedModule]
+                declarations: [SharedComponent]
             },] },
 ];
 /** @nocollapse */
-ChartsModule.ctorParameters = function () { return []; };
+SharedModule.ctorParameters = function () { return []; };

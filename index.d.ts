@@ -1,2 +1,2 @@
-export declare class ChartsModule {
+export declare class SharedModule {
 }
