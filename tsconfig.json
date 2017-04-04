@@ -5,14 +5,20 @@
         "target": "es5",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
+        "allowUnusedLabels": false,
+        "noImplicitReturns": true,
         "suppressImplicitAnyIndexErrors": true,
         "declaration": true,
         "moduleResolution": "node",
         "noUnusedLocals": true,
+        "outDir": "./bundles",
         "types": [
             "hammerjs",
             "jasmine",
             "node"
+        ],
+        "typeRoots": [
+            "node_modules/@types"
         ],
         "lib": ["es2015", "dom"]
     },
@@ -22,7 +28,8 @@
     ],
     "exclude": [
         "node_modules",
-        "bundles"
+        "bundles",
+        "**/*.spec.ts"
     ],
     "angularCompilerOptions": {
         "strictMetadataEmit": true,
