@@ -9,8 +9,8 @@ var SharedModule = (function () {
 export { SharedModule };
 SharedModule.decorators = [
     { type: NgModule, args: [{
-                imports: [CommonModule, SharedComponent],
-                declarations: [],
+                imports: [CommonModule],
+                declarations: [SharedComponent],
                 exports: [
                     SharedComponent,
                 ]

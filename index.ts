@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { SharedComponent } from './src/shared.component';
 
 @NgModule({
-  imports: [CommonModule, SharedComponent],
-  declarations: [],
+  imports: [CommonModule],
+  declarations: [SharedComponent],
   exports: [
     SharedComponent,
   ]
