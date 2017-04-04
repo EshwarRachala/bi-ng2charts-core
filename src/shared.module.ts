@@ -7,6 +7,6 @@ import { SharedComponent } from './shared.component';
     exports: [
         CommonModule, SharedComponent,
     ],
-    declarations: []
+    declarations: [SharedComponent]
 })
 export class SharedModule { }  

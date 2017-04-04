@@ -5,15 +5,15 @@ import { SharedModule } from './src/shared.module';
 
 @NgModule({
   declarations: [
-    SharedComponent
+    SharedComponent, SharedModule
   ],
   imports: [
-      SharedModule
+    SharedModule
   ],
-  exports:[SharedComponent,
-  SharedModule]
+  exports: [SharedComponent,
+    SharedModule]
 })
 
 export class ChartsModule {
-    
- }
+
+}
