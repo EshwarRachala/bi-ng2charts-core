@@ -10,7 +10,7 @@
     "commit": "npm run prepublish && npm test && git add * && git commit -m 'updated'",
     "prepublish": "ngc && npm run build",
     "build": "webpack",
-    "link": "npm link && git add * && git commit -m 'updated'",
+    "link": "npm link",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
