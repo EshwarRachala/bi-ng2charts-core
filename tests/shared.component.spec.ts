@@ -17,6 +17,6 @@ describe('SharedComponent', () => {
     let fixture = TestBed.createComponent(SharedComponent);
     fixture.detectChanges();
     let compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('app works!');
+    expect(compiled.querySelector('h1').textContent).toContain('Sample component');
   }));
 });

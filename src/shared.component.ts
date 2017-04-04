@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'shared-test',
-    template:'<h1>app works!</h1>'
+    selector: 'shared-component',
+    template: `<h1>Sample component</h1>`
 })
+
 export class SharedComponent {
+
+    constructor() {
+    }
+
 }
