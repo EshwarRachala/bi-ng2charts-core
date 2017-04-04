@@ -18,8 +18,7 @@
     },
     "files": [
         "index.ts",
-        "./src/shared.component.ts",
-        "./src/shared.module.ts"
+        "./src/shared.component.ts"
     ],
     "exclude": [
         "node_modules",
