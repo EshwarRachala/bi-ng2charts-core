@@ -10,7 +10,7 @@ export { ChartsModule };
 ChartsModule.decorators = [
     { type: NgModule, args: [{
                 declarations: [
-                    SharedComponent
+                    SharedComponent, SharedModule
                 ],
                 imports: [
                     SharedModule

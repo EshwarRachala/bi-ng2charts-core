@@ -13,7 +13,7 @@ SharedModule.decorators = [
                 exports: [
                     CommonModule, SharedComponent,
                 ],
-                declarations: []
+                declarations: [SharedComponent]
             },] },
 ];
 /** @nocollapse */
