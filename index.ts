@@ -9,14 +9,12 @@ export * from './src/shared.component';
   declarations: [SharedComponent],
   exports: [
     SharedComponent,
-  ],
-  bootstrap: [SharedComponent]
+  ]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
-      ngModule: SharedModule,
-      providers: []
+      ngModule: SharedModule
     };
   }
 }
