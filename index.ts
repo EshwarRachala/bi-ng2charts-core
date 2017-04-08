@@ -1,6 +1,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedComponent } from './src/shared.component';
+import { D3Service } from 'd3-ng2-service';
+
 import { BarChartComponent } from './src/barchart.component';
 
 import { BubbleChartComponent } from './src/bubblechart.component';
@@ -14,15 +15,14 @@ export * from './src/bubblechart.component';
 @NgModule({
   imports: [CommonModule],
   declarations: [
-    SharedComponent,
     BarChartComponent,
     BubbleChartComponent
-    ],
+  ],
   exports: [
-    SharedComponent,
     BarChartComponent,
     BubbleChartComponent
-  ]
+  ],
+  providers: [D3Service]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {

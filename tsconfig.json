@@ -15,7 +15,8 @@
         "types": [
             "hammerjs",
             "jasmine",
-            "node"
+            "node",
+            "d3"
         ],
         "typeRoots": [
             "node_modules/@types"
