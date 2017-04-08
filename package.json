@@ -25,7 +25,8 @@
   "author": "Eshwar <eshwar.appdev@gmail.com>",
   "license": "ISC",
   "peerDependencies": {
-    "@angular/core": ">=2.0.0"
+    "@angular/core": ">=2.0.0",
+    "d3": "4.7.4"
   },
   "devDependencies": {
     "@angular/animations": "4.0.0",
@@ -37,6 +38,7 @@
     "@angular/platform-browser-dynamic": "4.0.0",
     "@angular/platform-server": "4.0.0",
     "@angular/router": "4.0.0",
+    "@types/d3": "4.7.0",
     "@types/hammerjs": "2.0.34",
     "@types/jasmine": "2.5.46",
     "@types/node": "7.0.10",
@@ -73,5 +75,8 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "d3": "4.7.4"
   }
 }
