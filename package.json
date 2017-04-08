@@ -25,7 +25,9 @@
   "author": "Eshwar <eshwar.appdev@gmail.com>",
   "license": "ISC",
   "peerDependencies": {
-    "@angular/core": ">=2.0.0",
+    "@angular/core": ">=2.0.0"
+  },
+  "dependencies": {
     "d3": "4.7.4"
   },
   "devDependencies": {
@@ -75,10 +77,5 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "dependencies": {
-    "d3": "4.7.4",
-    "d3-ng2-service": "1.8.0",
-    "d3-selection": "1.0.5"
   }
 }

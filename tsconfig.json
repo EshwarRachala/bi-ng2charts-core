@@ -30,7 +30,9 @@
     "exclude": [
         "node_modules",
         "bundles",
-        "**/*.spec.ts"
+        "**/*.spec.ts",
+        "typings/main.d.ts",
+        "typings/main"
     ],
     "angularCompilerOptions": {
         "strictMetadataEmit": true,
