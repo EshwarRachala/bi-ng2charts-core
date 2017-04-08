@@ -78,6 +78,7 @@
   },
   "dependencies": {
     "d3": "4.7.4",
-    "d3-ng2-service": "1.8.0"
+    "d3-ng2-service": "1.8.0",
+    "d3-selection": "1.0.5"
   }
 }

@@ -1,15 +1,14 @@
-import { D3 } from 'd3-ng2-service';
+import * as d3 from 'd3';
 
 // Exports the visualization module
 export class BubblesComponent {
-    private d3: D3;
-    target: HTMLElement;
+   target: HTMLElement;
     constructor(target: HTMLElement) {
         this.target = target;
     }
 
     render(values: number[]) {
-        this.d3.select(this.target)
+        d3.select(this.target)
             // Get the old circles
             .selectAll('circle')
             .data(values)
