@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 
 // Exports the visualization module
 export class BubblesComponent {
-   target: HTMLElement;
+    target: HTMLElement;
     constructor(target: HTMLElement) {
         this.target = target;
     }
