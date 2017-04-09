@@ -10,7 +10,8 @@
     "build": "webpack",
     "prepublish": "ngc && npm run build",
     "checkin": "git-cz -a",
-    "commit": "npm run prepublish && npm test && git-cz -a && npm link",
+    "check": "npm install -g && npm link",
+    "commit": "npm run prepublish && npm test && npm run checkin && npm run check",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
