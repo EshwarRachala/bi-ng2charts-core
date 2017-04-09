@@ -1,23 +1,23 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async } from '@angular/core/testing';
-import { SharedComponent } from '../src/shared.component';
+import { LineChartComponent } from '../src/linechart/linechart.component';
 
-describe('SharedComponent', () => {
+describe('LinechartComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        SharedComponent
+        LineChartComponent
       ],
     });
     TestBed.compileComponents();
   });
 
  it('should render title in a h1 tag', async(() => {
-    let fixture = TestBed.createComponent(SharedComponent);
+    let fixture = TestBed.createComponent(LineChartComponent);
     fixture.detectChanges();
     let compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('h1').textContent)
-    .toContain('Shared component');
+    .toContain('Line Chart');
   }));
 });

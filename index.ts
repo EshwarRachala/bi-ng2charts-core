@@ -1,25 +1,28 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { BarChartComponent } from './src/barchart.component';
+import { BarChartComponent } from './src/barchart/barchart.component';
+import { BubbleChartComponent } from './src/bubblechart/bubblechart.component';
+import { LineChartComponent } from './src/linechart/linechart.component';
 
-import { BubbleChartComponent } from './src/bubblechart.component';
 
-export * from './src/shared.component';
-export * from './src/barchart.component';
-export * from './src/bubbles.component';
-export * from './src/bubblechart.component';
+export * from './src/linechart/linechart.component';
+export * from './src/barchart/barchart.component';
+export * from './src/bubblechart/bubbles.component';
+export * from './src/bubblechart/bubblechart.component';
 
 
 @NgModule({
   imports: [CommonModule],
   declarations: [
     BarChartComponent,
-    BubbleChartComponent
+    BubbleChartComponent,
+    LineChartComponent
   ],
   exports: [
     BarChartComponent,
-    BubbleChartComponent
+    BubbleChartComponent,
+    LineChartComponent
   ]
 })
 export class SharedModule {

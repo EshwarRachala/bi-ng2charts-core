@@ -22,8 +22,9 @@
   "keywords": [
     "angular",
     "angular 2",
-    "translate",
-    "i18n"
+    "d3",
+    "webpack",
+    "charts"
   ],
   "author": "Eshwar <eshwar.appdev@gmail.com>",
   "license": "ISC",
