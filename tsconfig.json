@@ -1,9 +1,12 @@
 {
     "compilerOptions": {
-        "noImplicitAny": true,
-        "module": "umd",
+        "module": "commonjs",
         "target": "ES6",
+        "outDir": "./bundles",
+        "noImplicitAny": true,
         "sourceMap": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "allowUnusedLabels": false,
@@ -12,31 +15,17 @@
         "declaration": true,
         "moduleResolution": "node",
         "noUnusedLocals": true,
-        "outDir": "./bundles",
-        "types": [
-            "hammerjs",
-            "jasmine",
-            "node",
-            "d3"
-        ],
-        "typeRoots": [
-            "node_modules/@types"
-        ],
+        "types": ["hammerjs", "jasmine", "node", "d3"],
+        "typeRoots": ["node_modules/@types"],
         "lib": ["es2015", "dom"]
     },
-    "files": [
+    "include": [
         "index.ts",
-        "./src/shared.component.ts",
-        "./src/barchart.component.ts",
-        "./src/bubblechart.component.ts",
-        "./src/bubbles.component.ts"
+        "./src/**/*"
     ],
     "exclude": [
         "node_modules",
-        "bundles",
-        "**/*.spec.ts",
-        "typings/main.d.ts",
-        "typings/main"
+        "**/*.spec.ts"
     ],
     "angularCompilerOptions": {
         "strictMetadataEmit": true,

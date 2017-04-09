@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'bar-chart',
-    template: `<h1>Bar Chart</h1>`
+    template: `<h1>Bar Chart 1</h1>`
 })
 
 export class BarChartComponent {

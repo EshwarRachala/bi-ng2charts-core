@@ -1,6 +1,10 @@
 const helpers = require('./config/helpers'),
     webpack = require('webpack'),
-    CleanWebpackPlugin = require('clean-webpack-plugin');
+    CleanWebpackPlugin = require('clean-webpack-plugin'),
+    {
+        CheckerPlugin,
+        TsConfigPathsPlugin
+    } = require('awesome-typescript-loader');
 
 /**
  * Webpack Plugins
@@ -11,19 +15,19 @@ const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 
 module.exports = {
     devtool: 'inline-source-map',
-
     resolve: {
-        extensions: ['.ts', '.js']
+        extensions: ['.ts', '.tsx', '.js', '.jsx'],
+        plugins: [
+            //   new TsConfigPathsPlugin(  { tsconfig, compiler }  )
+        ]
     },
-
     entry: helpers.root('index.ts'),
-
     output: {
         path: helpers.root('bundles'),
         publicPath: '/',
-        filename: 'core.umd.js',
+        filename: 'core.commonjs.js',
         library: 'bluebi-core',
-        libraryTarget: 'umd'
+        libraryTarget: 'commonjs'
     },
     externals: [/^\@angular\//, /^rxjs\//, /^d3\//],
     module: {
@@ -43,6 +47,7 @@ module.exports = {
     },
 
     plugins: [
+        new CheckerPlugin(),
         new webpack.ProvidePlugin({
             d3: 'd3'
         }),
