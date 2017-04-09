@@ -1,5 +1,6 @@
 {
   "name": "@bluebi/core",
+  "private": false,
   "version": "1.0.0",
   "description": "d3 angular components",
   "main": "index.js",
