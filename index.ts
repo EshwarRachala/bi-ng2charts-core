@@ -10,8 +10,7 @@ export * from './src/linechart/linechart.component';
 export * from './src/barchart/barchart.component';
 export * from './src/bubblechart/bubbles.component';
 export * from './src/bubblechart/bubblechart.component';
-
-export * from './src/xaxis.component';
+ 
 
 @NgModule({
   imports: [CommonModule],
