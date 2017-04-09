@@ -6,9 +6,6 @@ const helpers = require('./config/helpers'),
         TsConfigPathsPlugin
     } = require('awesome-typescript-loader');
 
-/**
- * Webpack Plugins
- */
 const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
@@ -25,11 +22,11 @@ module.exports = {
     output: {
         path: helpers.root('bundles'),
         publicPath: '/',
-        filename: 'core.commonjs.js',
+        filename: 'core.umd.js',
         library: 'bluebi-core',
-        libraryTarget: 'commonjs'
+        libraryTarget: 'umd'
     },
-    externals: [/^\@angular\//, /^rxjs\//, /^d3\//],
+    externals: [/^\@angular\//, /^rxjs\//],
     module: {
         rules: [{
             enforce: 'pre',
@@ -48,9 +45,6 @@ module.exports = {
 
     plugins: [
         new CheckerPlugin(),
-        new webpack.ProvidePlugin({
-            d3: 'd3'
-        }),
         new webpack.ContextReplacementPlugin(
             /angular(\\|\/)core(\\|\/)@angular/,
             helpers.root('./src')
