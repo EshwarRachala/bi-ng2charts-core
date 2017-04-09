@@ -1,4 +1,4 @@
-import * as d3 from 'd3';
+declare var d3:any;
 
 // Exports the visualization module
 export class BubblesComponent {
