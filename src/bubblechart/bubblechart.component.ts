@@ -4,7 +4,8 @@ import { Component, Input, OnChanges, AfterViewInit, ViewChild } from '@angular/
 import { BubblesComponent } from './bubbles.component';
 
 // Identifies the class as a component directive that will be associated
-// with `bubbles` elements in the DOM, and will include the specified markup as its template
+// with `bubbles` elements in the DOM, and will include the 
+// specified markup as its template
 @Component({
     selector: 'bubbles',
     template: '<svg #target width="900" height="300"></svg>'
@@ -29,7 +30,8 @@ export class BubbleChartComponent implements OnChanges, AfterViewInit {
 
     // Lifecycle hook for when the component's view has been fully initialized
     ngAfterViewInit() {
-        // We have to wait until the view has been initialized before we can get the
+        // We have to wait until the view has been initialized 
+        // before we can get the
         //DOM element to bind the chart to it
         this.chart = new BubblesComponent(this.target.nativeElement);
         this.chart.render(this.values);
