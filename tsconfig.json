@@ -3,6 +3,7 @@
         "noImplicitAny": true,
         "module": "commonjs",
         "target": "ES6",
+        "sourceMap": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "allowUnusedLabels": false,
@@ -25,7 +26,10 @@
     },
     "files": [
         "index.ts",
-        "./src/shared.component.ts"
+        "./src/shared.component.ts",
+        "./src/barchart.component.ts",
+        "./src/bubblechart.component.ts",
+        "./src/bubbles.component.ts"
     ],
     "exclude": [
         "node_modules",
