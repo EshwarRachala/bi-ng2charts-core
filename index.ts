@@ -3,23 +3,21 @@ import { CommonModule } from '@angular/common';
 
 import { BarChartComponent } from './src/barchart.component';
 
-import { BubbleChartComponent } from './src/bubblechart.component';
+// import { BubbleChartComponent } from './src/bubblechart.component';
 
 export * from './src/shared.component';
 export * from './src/barchart.component';
-export * from './src/bubbles.component';
-export * from './src/bubblechart.component';
+// export * from './src/bubbles.component';
+// export * from './src/bubblechart.component';
 
 
 @NgModule({
   imports: [CommonModule],
   declarations: [
-    BarChartComponent,
-    BubbleChartComponent
+    BarChartComponent 
   ],
   exports: [
-    BarChartComponent,
-    BubbleChartComponent
+    BarChartComponent 
   ]
 })
 export class SharedModule {

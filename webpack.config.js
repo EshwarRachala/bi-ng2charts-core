@@ -1,7 +1,3 @@
-/**
- * Adapted from angular2-webpack-starter
- */
-
 const helpers = require('./config/helpers'),
     webpack = require('webpack'),
     CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -26,13 +22,10 @@ module.exports = {
         path: helpers.root('bundles'),
         publicPath: '/',
         filename: 'core.umd.js',
-        library: 'ngx-translate-core',
+        library: 'bluebi-core',
         libraryTarget: 'umd'
     },
-
-    // require those dependencies but don't bundle them
-    externals: [/^\@angular\//, /^rxjs\//],
-
+    externals: [/^\@angular\//, /^rxjs\//, /^d3\//],
     module: {
         rules: [{
             enforce: 'pre',
@@ -66,9 +59,6 @@ module.exports = {
                 }
             }
         }),
-
-        // Reference: https://github.com/johnagan/clean-webpack-plugin
-        // Removes the bundle folder before the build
         new CleanWebpackPlugin(['bundles'], {
             root: helpers.root(),
             verbose: false,
