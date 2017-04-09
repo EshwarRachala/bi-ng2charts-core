@@ -50,7 +50,9 @@ module.exports = {
     },
 
     plugins: [
-        // fix the warning in ./~/@angular/core/src/linker/system_js_ng_module_factory_loader.js
+        new webpack.ProvidePlugin({
+            d3: 'd3'
+        }),
         new webpack.ContextReplacementPlugin(
             /angular(\\|\/)core(\\|\/)@angular/,
             helpers.root('./src')
