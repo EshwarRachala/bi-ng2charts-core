@@ -12,11 +12,11 @@ import { BarsComponent } from './bars.component';
 })
 export class BarChartComponent implements OnChanges, AfterViewInit {
     // Declares values as a data-bound property
-    @Input() data: number[];
+    @Input() data: any[];
 
     // Gets a reference to the child DOM node
-    @Input() width: number;
-    @Input() height: number;
+    @Input() width: any;
+    @Input() height: any;
     @Input() margin: any;
 
     @ViewChild('target') target: any;
