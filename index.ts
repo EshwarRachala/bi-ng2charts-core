@@ -8,6 +8,7 @@ import { LineChartComponent } from './src/linechart/linechart.component';
 
 export * from './src/linechart/linechart.component';
 export * from './src/barchart/barchart.component';
+export * from './src/barchart/bars.component';
 export * from './src/bubblechart/bubbles.component';
 export * from './src/bubblechart/bubblechart.component';
  

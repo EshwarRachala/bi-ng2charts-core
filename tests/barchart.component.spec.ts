@@ -13,11 +13,9 @@ describe('BarChartComponent', () => {
     TestBed.compileComponents();
   });
 
- it('should render title in a h1 tag', async(() => {
-    let fixture = TestBed.createComponent(BarChartComponent);
-    fixture.detectChanges();
-    let compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent)
-    .toContain('Bar Chart');
-  }));
+  // it('should present', async(() => {
+  //   let fixture = TestBed.createComponent(BarChartComponent);
+  //   fixture.detectChanges();
+  //   expect(fixture).toBeDefined();
+  // }));
 });
