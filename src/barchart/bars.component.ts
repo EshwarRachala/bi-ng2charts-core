@@ -2,13 +2,17 @@ import * as d3 from 'd3';
 
 export class BarsComponent {
     target: HTMLElement;
-    width: number;
-    height: number;
+    width: any;
+    height: any;
     margin: any;
+    private totalwidth: any;
+    private totalheight: any;
 
-    constructor(target: HTMLElement, width: number,
-        height: number, margin: any) {
+    constructor(target: HTMLElement, width: any,
+        height: any, margin: any) {
         this.target = target;
+        this.totalwidth = width + margin.left + margin.right;
+        this.totalheight = height + margin.left + margin.right;
         this.width = width - margin.left - margin.right;
         this.height = height - margin.top - margin.bottom;
         this.margin = margin;
@@ -25,7 +29,9 @@ export class BarsComponent {
             .range([this.height, 0])
             .padding(0.1);
 
-        const svg = d3.select(this.target);
+        const svg = d3.select(this.target)
+            .attr('width', this.totalwidth)
+            .attr('height', this.totalheight);
 
         const g = svg.append('g')
             .attr('transform',
