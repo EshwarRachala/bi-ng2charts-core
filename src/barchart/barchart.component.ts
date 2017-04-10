@@ -8,7 +8,7 @@ import { BarsComponent } from './bars.component';
 // specified markup as its template
 @Component({
     selector: 'bar-chart',
-    template: '<svg #target width="400" height="200"></svg>'
+    template: '<svg #target></svg>'
 })
 export class BarChartComponent implements OnChanges, AfterViewInit {
     // Declares values as a data-bound property

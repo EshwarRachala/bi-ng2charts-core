@@ -9,19 +9,19 @@ export class BarsComponent {
     constructor(target: HTMLElement, width: number,
         height: number, margin: any) {
         this.target = target;
-        this.width = width;
-        this.height = height;
+        this.width = width - margin.left - margin.right;
+        this.height = height - margin.top - margin.bottom;
         this.margin = margin;
     }
 
     render(data: any[]) {
         let xScale = d3.scaleLinear()
-            .domain([0, d3.max(data, d => d[0])])
+            .domain([0, d3.max(data, d => d.age)])
             .range([0, this.width])
             .nice();
 
         let yScale = d3.scaleBand()
-            .domain(data.map(d => d[1]))
+            .domain(data.map(d => d.name))
             .range([this.height, 0])
             .padding(0.1);
 
@@ -56,9 +56,9 @@ export class BarsComponent {
             .enter()
             .append('rect')
             .attr('class', 'bar')
-            .attr('y', d => yScale(d[1]))
+            .attr('y', d => yScale(d.name))
             .attr('height', yScale.bandwidth())
-            .attr('width', d => xScale(d[0]));
+            .attr('width', d => xScale(d.age));
     }
 
     destroy() {
