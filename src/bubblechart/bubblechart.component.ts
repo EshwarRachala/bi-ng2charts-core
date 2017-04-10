@@ -8,7 +8,7 @@ import { BubblesComponent } from './bubbles.component';
 // specified markup as its template
 @Component({
     selector: 'bubbles',
-    template: '<svg #target width="900" height="300"></svg>'
+    template: '<svg #target width="300" height="200"></svg>'
 })
 export class BubbleChartComponent implements OnChanges, AfterViewInit {
     // Declares values as a data-bound property
