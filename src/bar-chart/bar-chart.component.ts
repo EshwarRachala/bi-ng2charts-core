@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, AfterViewInit, ViewChild }
     from '@angular/core';
-import { ScaleComponent } from '../scale.component';
+import { ChartComponent } from '../chart.component';
 
 @Component({
     selector: 'bar-chart',
@@ -15,44 +15,35 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
     @ViewChild('target') target: any;
 
     private svg: any;
-    private margin: any;
-    private width: any;
-    private height: any;
     private xScale: any;
     private yScale: any;
-    private htmlElement: HTMLElement;
 
-    private scalecomp: ScaleComponent;
+    private chart: ChartComponent;
 
     constructor() { }
 
     ngOnChanges(changes: any): void {
         // tslint:disable-next-line:curly
         if (!this.settings || !changes.data || !this.svg) return;
-        this.data = changes.data;
-        this.scalecomp.xAxis(this.data, this.xScale);
-        this.scalecomp.yAxis(this.data, this.yScale);
+        this.chart.xAxis(changes.data, this.xScale);
+        this.chart.yAxis(changes.data, this.yScale);
+
         this.render();
     }
 
     ngAfterViewInit() {
-        this.htmlElement = this.target.nativeElement;
-        this.setup();
-        this.scalecomp.xAxis(this.data, this.xScale);
-        this.scalecomp.yAxis(this.data, this.yScale);
+        this.chart = new ChartComponent(this.target.nativeElement)
+
+        this.xScale = this.chart.xScale();
+        this.yScale = this.chart.yScale();
+
+        this.svg = this.chart.SVG();
+
+        this.chart.xAxis(this.data, this.xScale);
+        this.chart.yAxis(this.data, this.yScale);
+
         this.render();
 
-    }
-
-    private setup(): void {
-        this.margin = { top: 20, right: 20, bottom: 70, left: 70 };
-        this.width = this.htmlElement.clientWidth - this.margin.left - this.margin.right;
-        this.height = this.htmlElement.clientWidth * 0.5 - this.margin.top - this.margin.bottom;
-        this.scalecomp = new ScaleComponent(this.target.nativeElement)
-
-        this.xScale = this.scalecomp.xScale();
-        this.yScale = this.scalecomp.yScale();
-        this.svg = this.scalecomp.SVG();
     }
 
     private render(): void {
