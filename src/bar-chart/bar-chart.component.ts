@@ -27,12 +27,12 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
         if (!this.settings || !changes.data || !this.svg) return;
         this.chart.xAxis(changes.data, this.xScale);
         this.chart.yAxis(changes.data, this.yScale);
+        this.chart.Bar(changes.data, this.xScale, this.yScale);
 
-        this.render();
     }
 
     ngAfterViewInit() {
-        this.chart = new ChartComponent(this.target.nativeElement)
+        this.chart = new ChartComponent(this.target.nativeElement, this.settings)
 
         this.xScale = this.chart.xScale();
         this.yScale = this.chart.yScale();
@@ -42,24 +42,11 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
         this.chart.xAxis(this.data, this.xScale);
         this.chart.yAxis(this.data, this.yScale);
 
-        this.render();
+        this.chart.Bar(this.data, this.xScale, this.yScale);
+
+        // this.render();
 
     }
-
-    private render(): void {
-
-        this.svg.selectAll('.bar')
-            .data(this.data)
-            .enter()
-            .append('rect')
-            .attr('class', 'bar')
-            .attr('fill', this.settings.fill)
-            .attr('y', (d: any) => this.yScale(d.text))
-            .attr('height', this.yScale.bandwidth())
-            .attr('width', (d: any) => this.xScale(d.value));
-
-    }
-
 }
 
 

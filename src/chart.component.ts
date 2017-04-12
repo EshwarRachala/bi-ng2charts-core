@@ -5,25 +5,25 @@ export interface IChart<T> {
     SVG(): T;
     xScale(): T;
     yScale(): T;
-    xAxis(data: any, svg: any, xscale: any): T;
-    yAxis(data: any, svg: any, xscale: any): T;
+    xAxis(data: any, xscale: any): T;
+    yAxis(data: any, xscale: any): T;
+    Bar(): T;
+
 }
 
 export class ChartComponent implements IChart<any> {
-
     @Input() host: any;
     private width: any;
     private height: any;
     private svg: any;
     private margin: any;
     private htmlElement: HTMLElement;
+    private settings: any;
+    private scale: any;
+    private axis: any;
 
-    // @Input() width: any;
-    // @Input() height: any;
-    scale: any;
-    axis: any;
-
-    constructor(htmlElement: HTMLElement) {
+    constructor(htmlElement: HTMLElement, settings: any) {
+        this.settings = settings;
         this.margin = { top: 20, right: 20, bottom: 70, left: 70 };
         this.htmlElement = htmlElement;
         this.width = this.htmlElement.clientWidth - this.margin.left - this.margin.right;
@@ -54,11 +54,8 @@ export class ChartComponent implements IChart<any> {
     }
 
     xAxis(data: any, scale: any): void {
-
         this.scale = scale;
-
         this.axis = this.scale.domain([0, d3.max(data, (d: any) => d.value)]);
-
         this.svg.append('g')
             .attr('class', 'x axis')
             .attr('transform', `translate(0,${this.height})`)
@@ -71,11 +68,8 @@ export class ChartComponent implements IChart<any> {
     }
 
     yAxis(data: any, scale: any): void {
-
         this.scale = scale;
-
         this.axis = this.scale.domain(data.map((d: any) => d.text));
-
         this.svg.append('g')
             .attr('class', 'y axis')
             .call(d3.axisLeft(this.axis))
@@ -84,6 +78,20 @@ export class ChartComponent implements IChart<any> {
             .style('text-anchor', 'end')
             .attr('dx', '-.8em')
             .attr('dy', '.15em');
+    }
+
+    Bar(data: any, xScale: any, yScale: any) {
+
+        this.svg.selectAll('.bar')
+            .data(data)
+            .enter()
+            .append('rect')
+            .attr('class', 'bar')
+            .attr('fill', this.settings.fill)
+            .attr('y', (d: any) => yScale(d.text))
+            .attr('height', yScale.bandwidth())
+            .attr('width', (d: any) => xScale(d.value));
+
     }
 }
 
