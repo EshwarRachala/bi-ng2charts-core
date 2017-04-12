@@ -11,6 +11,9 @@ import { BarsComponent } from './bars.component';
     template: '<svg #target></svg>'
 })
 export class BarChartComponent implements OnChanges, AfterViewInit {
+
+    @ViewChild('target') target: any;
+
     // Declares values as a data-bound property
     @Input() data: any[];
 
@@ -19,7 +22,6 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
     @Input() height: any;
     @Input() margin: any;
 
-    @ViewChild('target') target: any;
     // An instance of the BubblesChart
 
 
