@@ -23,21 +23,19 @@ export class AreaChartComponent implements OnChanges, AfterViewInit {
     private xAxis: any;
     private yAxis: any;
     private htmlElement: HTMLElement;
-
+    
     constructor() { }
 
     ngOnChanges(changes: any): void {
         // tslint:disable-next-line:curly
         if (!this.config || !this.host) return;
         this.setup();
-        this.buildSVG();
         this.drawXAxis();
         this.drawYAxis();
         this.render();
     }
 
     ngAfterViewInit() {
-        debugger;
         this.htmlElement = this.target.nativeElement;
         this.host = d3.select(this.htmlElement);
         this.setup();
@@ -65,7 +63,6 @@ export class AreaChartComponent implements OnChanges, AfterViewInit {
             .attr('transform', 'translate(' +
             this.margin.left + ',' + this.margin.top + ')');
 
-        this.svg.attr('fill', 'red');
     }
 
     private drawXAxis(): void {
@@ -108,9 +105,10 @@ export class AreaChartComponent implements OnChanges, AfterViewInit {
             .enter()
             .append('rect')
             .attr('class', 'bar')
-            .attr('y', (d:any) => this.yScale(d.text))
+            .attr('fill', this.config.settings.fill)
+            .attr('y', (d: any) => this.yScale(d.text))
             .attr('height', this.yScale.bandwidth())
-            .attr('width', (d:any) => this.xScale(d.value));
+            .attr('width', (d: any) => this.xScale(d.value));
 
     }
 

@@ -1,4 +1,4 @@
 export interface ChartConfig {
-    settings: { width: number, height: number, margin: any };
+    settings: { fill: string };
     dataset: Array<{ text: string, value: number }>
 }
