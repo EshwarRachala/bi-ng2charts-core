@@ -43,9 +43,6 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
         this.chart.yAxis(this.data, this.yScale);
 
         this.chart.Bar(this.data, this.xScale, this.yScale);
-
-        // this.render();
-
     }
 }
 
