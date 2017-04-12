@@ -29,14 +29,15 @@ export class AreaChartComponent implements OnChanges, AfterViewInit {
     ngOnChanges(changes: any): void {
         // tslint:disable-next-line:curly
         if (!this.config || !this.host) return;
-        // this.setup();
-        // this.buildSVG();
-        // this.drawXAxis();
-        //  this.drawYAxis();
-        //  this.render();
+        this.setup();
+        this.buildSVG();
+        this.drawXAxis();
+        this.drawYAxis();
+        this.render();
     }
 
     ngAfterViewInit() {
+        debugger;
         this.htmlElement = this.target.nativeElement;
         this.host = d3.select(this.htmlElement);
         this.setup();
@@ -48,11 +49,9 @@ export class AreaChartComponent implements OnChanges, AfterViewInit {
     }
 
     private setup(): void {
-        this.margin = this.config.settings.margin;
+        this.margin = { top: 20, right: 20, bottom: 70, left: 70 };
         this.width = this.htmlElement.clientWidth - this.margin.left - this.margin.right;
         this.height = this.htmlElement.clientWidth * 0.5 - this.margin.top - this.margin.bottom;
-        // this.width = this.config.settings.width - this.margin.left - this.margin.right;
-        // this.height = this.config.settings.height - this.margin.top - this.margin.bottom;
         this.xScale = d3.scaleLinear().range([0, this.width]);
         this.yScale = d3.scaleBand().range([this.height, 0]);
     }
@@ -72,9 +71,9 @@ export class AreaChartComponent implements OnChanges, AfterViewInit {
     private drawXAxis(): void {
         this.xAxis = this.xScale
             .domain([0, d3.max(this.config.dataset,
-                (d: any) => d.x)]);
-        this.svg
-            .append('g')
+                (d: any) => d.value)]);
+
+        this.svg.append('g')
             .attr('class', 'x axis')
             .attr('transform', `translate(0,${this.height})`)
             .call(d3.axisBottom(this.xAxis))
@@ -82,13 +81,13 @@ export class AreaChartComponent implements OnChanges, AfterViewInit {
             .style('font-size', '12px')
             .style('text-anchor', 'end')
             .attr('dx', '-.8em')
-            .attr('dy', '.15em')
+            .attr('dy', '.15em');
     }
 
     private drawYAxis(): void {
 
         this.yAxis = this.yScale
-            .domain(this.config.dataset.map(d => d.y))
+            .domain(this.config.dataset.map(d => d.text))
             .range([this.height, 0])
             .padding(0.1);
 
@@ -109,9 +108,9 @@ export class AreaChartComponent implements OnChanges, AfterViewInit {
             .enter()
             .append('rect')
             .attr('class', 'bar')
-            .attr('y', (d: any) => this.yScale(d.y))
+            .attr('y', (d:any) => this.yScale(d.text))
             .attr('height', this.yScale.bandwidth())
-            .attr('width', (d: any) => this.xScale(d.x));
+            .attr('width', (d:any) => this.xScale(d.value));
 
     }
 
