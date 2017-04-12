@@ -6,7 +6,7 @@ export class ScaleComponent {
     @Input() width: any;
     @Input() height: any;
 
-    private scale;
+    private scale: any;
 
     constructor(width: any, height: any) {
         this.width = width;
