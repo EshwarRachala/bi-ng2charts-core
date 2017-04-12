@@ -7,8 +7,7 @@ export interface IChart<T> {
     yScale(): T;
     xAxis(data: any, xscale: any): T;
     yAxis(data: any, xscale: any): T;
-    Bar(): T;
-
+    Bar(data: any, xScale: any, yScale: any): T;
 }
 
 export class ChartComponent implements IChart<any> {
