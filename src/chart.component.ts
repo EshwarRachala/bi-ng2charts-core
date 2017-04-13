@@ -16,6 +16,7 @@ export interface IChart<T> {
     extent(data: any): T;
     map(data: any): T;
     max(data: any): T;
+    parseTime(data: any): T;
     xAxis(value: any, scale: any): T;
     yAxis(value: any, scale: any): T;
     Bar(data: any, xScale: any, yScale: any): T;
@@ -119,6 +120,7 @@ export class ChartComponent implements IChart<any> {
      * @memberOf ChartComponent
      */
     xAxis(value: any, scale: any): void {
+
         const axis = scale.domain([0, value]);
 
         this.svg.append('g')
@@ -163,20 +165,32 @@ export class ChartComponent implements IChart<any> {
      * @memberOf ChartComponent
      */
     Bar(data: any, xScale: any, yScale: any) {
-
         this.svg
             .selectAll('.bar')
             .data(data)
             .enter()
             .append('rect')
             .attr('class', 'bar')
-            .attr('fill', 'steelblue')
             .attr('y', (d: any) => yScale(d.text))
             .attr('height', yScale.bandwidth())
             .attr('width', (d: any) => xScale(d.value));
     }
 
-    /**
+    Line(data: any, xScale: any, yScale: any) {
+
+        let line = d3.line()
+            .x((d: any) => xScale(d.date))
+            .y((d: any) => yScale(d.price));
+
+        this.svg
+            .append('path')
+            .data([data])
+            .attr('class', 'line')
+            .attr('d', line);
+
+    }
+
+    /** 
      * 
      * 
      * @param {*} data 
@@ -212,6 +226,9 @@ export class ChartComponent implements IChart<any> {
         return d3.max(data, (d: any) => d.value);
     }
 
+    parseTime(data: any, format = "%d-%b-%y") {
+        return d3.timeParse(format);
+    }
 
 }
 

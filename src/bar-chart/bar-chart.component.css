@@ -1,40 +1,44 @@
-:host,
-:host .areachart {
+.barchart {
     width: 100%;
     display: block;
 }
 
-:host .axis path,
-:host .axis line {
+.barchart .axis path,
+.barchart .axis line {
     fill: none;
     stroke: rgba(0, 0, 0, 0.2);
     color: rgba(0, 0, 0, 0.2);
     shape-rendering: crispEdges;
 }
 
-:host .axis text {
+.barchart .axis text {
     font-size: 11px;
     fill: rgba(0, 0, 0, 0.9);
 }
 
-:host .grid .tick {
+.barchart .grid .tick {
     stroke: rgba(0, 0, 0, 0.1);
     opacity: 0.3;
 }
 
-:host .grid path {
+.barchart .grid path {
     stroke-width: 0;
 }
 
-:host .grid .tick {
+.barchart .grid .tick {
     stroke: rgba(0, 0, 0, 0.1);
     opacity: 0.3;
 }
 
-:host .grid path {
+.barchart .grid path {
     stroke-width: 0;
 }
 
-:host .color-label {
+.barchart .color-label {
     display: inline;
+}
+
+.barchart>.bar {
+    fill: red;
+    background-color: green;
 }

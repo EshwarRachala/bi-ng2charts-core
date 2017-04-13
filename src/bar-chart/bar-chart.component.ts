@@ -31,7 +31,6 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
         this.chart.yAxis(this.chart.map(changes.data), this.yScale);
 
         this.chart.Bar(changes.data, this.xScale, this.yScale);
-
     }
 
     ngAfterViewInit() {
@@ -46,7 +45,7 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
         this.chart.yAxis(this.chart.map(this.data), this.yScale);
 
         this.chart.Bar(this.data, this.xScale, this.yScale);
+
     }
+
 }
-
-
