@@ -9,13 +9,12 @@ describe('BarChartComponent', () => {
       declarations: [
         BarChartComponent
       ],
-    });
-    TestBed.compileComponents();
+    }).compileComponents();
   });
 
-  // it('should present', async(() => {
-  //   let fixture = TestBed.createComponent(BarChartComponent);
-  //   fixture.detectChanges();
-  //   expect(fixture).toBeDefined();
-  // }));
+  it('Bar chart should have a defined', async(() => {
+    let fixture = TestBed.createComponent(BarChartComponent);
+    let component = fixture.componentInstance;
+    expect(component).toBeDefined();
+  }));
 });

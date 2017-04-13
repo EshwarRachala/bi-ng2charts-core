@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { BarChartComponent } from './src/bar-chart/bar-chart.component';
 
+export * from './src/chart.component';
+export * from './src/enums';
 
 @NgModule({
   imports: [CommonModule],
@@ -13,10 +15,11 @@ import { BarChartComponent } from './src/bar-chart/bar-chart.component';
     BarChartComponent
   ]
 })
-export class SharedModule {
+
+export class Ng2ChartsModule {
   static forRoot(): ModuleWithProviders {
     return {
-      ngModule: SharedModule
+      ngModule: Ng2ChartsModule
     };
   }
 }

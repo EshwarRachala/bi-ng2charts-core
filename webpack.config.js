@@ -14,16 +14,13 @@ module.exports = {
     devtool: 'inline-source-map',
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.jsx'],
-        plugins: [
-            //   new TsConfigPathsPlugin(  { tsconfig, compiler }  )
-        ]
     },
     entry: helpers.root('index.ts'),
     output: {
         path: helpers.root('bundles'),
         publicPath: '/',
         filename: 'core.umd.js',
-        library: 'bluebi-core',
+        library: 'ng2charts',
         libraryTarget: 'umd'
     },
     externals: [/^\@angular\//, /^rxjs\//],

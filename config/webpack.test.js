@@ -1,24 +1,9 @@
-
-/**
- * Adapted from angular2-webpack-starter
- */
-
 const helpers = require('./helpers'),
     webpack = require('webpack'),
     LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 
-/**
- * Webpack Plugins
- */
 
 module.exports = {
-
-    /**
-     * Source map for Karma from the help of karma-sourcemap-loader &  karma-webpack
-     *
-     * Do not change, leave as is or it wont work.
-     * See: https://github.com/webpack/karma-webpack#source-maps
-     */
     devtool: 'inline-source-map',
 
     resolve: {
@@ -28,37 +13,48 @@ module.exports = {
 
     module: {
         rules: [{
-            enforce: 'pre',
-            test: /\.ts$/,
-            loader: 'tslint-loader',
-            exclude: [helpers.root('node_modules')]
-        }, {
-            enforce: 'pre',
-            test: /\.js$/,
-            loader: 'source-map-loader',
-            exclude: [
-                // these packages have problems with their sourcemaps
-                helpers.root('node_modules/rxjs'),
-                helpers.root('node_modules/@angular')
-            ]
-        }, {
-            test: /\.ts$/,
-            loader: 'awesome-typescript-loader',
-            query: {
-                // use inline sourcemaps for "karma-remap-coverage" reporter
-                sourceMap: false,
-                inlineSourceMap: true,
-                module: "commonjs",
-                removeComments: true
+                enforce: 'pre',
+                test: /\.ts$/,
+                loader: 'tslint-loader',
+                exclude: [helpers.root('node_modules')]
+            }, {
+                enforce: 'pre',
+                test: /\.js$/,
+                loader: 'source-map-loader',
+                exclude: [
+                    // these packages have problems with their sourcemaps
+                    helpers.root('node_modules/rxjs'),
+                    helpers.root('node_modules/@angular')
+                ]
             },
-            exclude: [/\.e2e\.ts$/]
-        }, {
-            enforce: 'post',
-            test: /\.(js|ts)$/,
-            loader: 'istanbul-instrumenter-loader',
-            include: helpers.root('src'),
-            exclude: [/\.spec\.ts$/, /\.e2e\.ts$/, /node_modules/]
-        }]
+            {
+                test: /\.ts$/,
+                loaders: [{
+                        loader: 'awesome-typescript-loader',
+                        query: {
+                            sourceMap: false,
+                            inlineSourceMap: true,
+                            module: "commonjs",
+                            removeComments: true
+                        }
+                    },
+                    'angular2-template-loader'
+                ],
+                exclude: [/\.e2e\.ts$/]
+            },
+            {
+                enforce: 'post',
+                test: /\.(js|ts)$/,
+                loader: 'istanbul-instrumenter-loader',
+                include: helpers.root('src'),
+                exclude: [/\.spec\.ts$/, /\.e2e\.ts$/, /node_modules/]
+            },
+            {
+                test: /\.(html|css)$/,
+                loader: 'raw-loader',
+                exclude: [helpers.root('src/index.html')]
+            }
+        ]
     },
 
     plugins: [
@@ -88,5 +84,7 @@ module.exports = {
     ],
 
     // disable warnings about bundle size for tests
-    performance: {hints: false}
+    performance: {
+        hints: false
+    }
 };
