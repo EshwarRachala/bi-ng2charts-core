@@ -1,4 +1,4 @@
-# bi-ng2charts
+# ng2charts
 Angular d3 chart components
 
 ## to resolve d3 we need to Install typings add --g to install globally
