@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, AfterViewInit, ViewChild }
     from '@angular/core';
 import { ChartComponent } from '../chart.component';
+import { ScaleType } from '../enums';
 
 @Component({
     selector: 'bar-chart',
@@ -10,7 +11,7 @@ import { ChartComponent } from '../chart.component';
 
 export class BarChartComponent implements OnChanges, AfterViewInit {
 
-    @Input() settings: any;
+    @Input() settings: any = {};
     @Input() data: Array<{ text: string, value: number }>;
     @ViewChild('target') target: any;
 
@@ -32,10 +33,9 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.chart = new ChartComponent(this.target.nativeElement, this.settings)
-
-        this.xScale = this.chart.xScale();
-        this.yScale = this.chart.yScale();
+        this.chart = new ChartComponent(this.target.nativeElement);
+        this.xScale = this.chart.xScale(ScaleType.Linear);
+        this.yScale = this.chart.yScale(ScaleType.Band);
 
         this.svg = this.chart.SVG();
 
@@ -43,6 +43,14 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
         this.chart.yAxis(this.data, this.yScale);
 
         this.chart.Bar(this.data, this.xScale, this.yScale);
+    }
+}
+
+export class InstanceLoader {
+    static getInstance<T>(context: Object, name: string, ...args: any[]): T {
+        var instance = Object.create(context[name].prototype);
+        instance.constructor.apply(instance, args);
+        return <T>instance;
     }
 }
 
