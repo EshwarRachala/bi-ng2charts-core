@@ -13,14 +13,17 @@ export class Chart {
     private yValue: any;
 
 
-    constructor(public element: HTMLElement) {
+    constructor() {
         this.margin = { top: 20, right: 20, bottom: 70, left: 70 };
+        //this.htmlElement = element;
+    }
+
+    createsvg(element: any) {
+        debugger;
         this.htmlElement = element;
         this.width = this.htmlElement.clientWidth - this.margin.left - this.margin.right;
         this.height = this.htmlElement.clientWidth * 0.5 - this.margin.top - this.margin.bottom;
-    }
 
-    createsvg() {
         this.svg = d3.select(this.htmlElement)
             .append('svg')
             .attr('width', this.width + this.margin.left + this.margin.right)

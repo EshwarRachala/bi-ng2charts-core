@@ -7,7 +7,8 @@ import { Chart } from '../d3-chart.component';
 @Component({
     selector: 'bar-chart',
     templateUrl: './bar-chart.component.html',
-    styleUrls: ['./bar-chart.component.css']
+    styleUrls: ['./bar-chart.component.css'],
+    providers: [Chart]
 })
 
 export class BarChartComponent implements OnChanges, AfterViewInit {
@@ -18,8 +19,8 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
 
     public chart: Chart;
 
-    constructor() {
-
+    constructor(chartService:Chart) {
+        this.chart = chartService;
     }
 
     ngOnChanges(changes: any): void {
@@ -27,19 +28,20 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
         if (!changes.data) return;
         debugger;
         this.data = changes.data.currentValue;
-        this.chart = new Chart(this.target.nativeElement);
+        //   this.chart = new Chart(this.target.nativeElement);
         console.log(this.data);
         this.render(this.data);
     }
 
     ngAfterViewInit() {
-      //  this.chart = new Chart(this.target.nativeElement);
-      //  this.render(this.data);
+        //  this.chart = new Chart(this.target.nativeElement);
+        //  this.render(this.data);
     }
 
     render(data: any) {
+        debugger;
         this.chart
-            .createsvg()
+            .createsvg(this.target.nativeElement)
             .xScale(ScaleType.Linear)
             .range(Axis.x)
             .Max(data, Axis.x)
