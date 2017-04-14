@@ -1,7 +1,7 @@
 {
   "name": "ng2charts",
   "private": false,
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "d3 angular components",
   "main": "index.js",
   "scripts": {
