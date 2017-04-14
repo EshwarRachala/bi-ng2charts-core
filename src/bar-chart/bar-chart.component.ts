@@ -31,7 +31,6 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
     }
 
     ngAfterViewInit() {
-
     }
 
     render(data: any) {

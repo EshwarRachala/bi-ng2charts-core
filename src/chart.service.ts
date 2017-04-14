@@ -9,7 +9,6 @@ export class ChartService {
     private height: any;
     private margin: any;
     htmlElement: HTMLElement;
-    private d3: any;
     private x: any = d3.scaleLinear();
     private y: any = d3.scaleLinear();
     private xValue: any;
@@ -27,8 +26,7 @@ export class ChartService {
      * @memberOf ChartService
      */
     public D3Module() {
-        this.d3 = d3;
-        return this.d3;
+        return d3;
     }
 
     /**
@@ -40,6 +38,7 @@ export class ChartService {
      * @memberOf ChartService
      */
     createsvg(element: any) {
+        
         this.htmlElement = element;
         this.width = this.htmlElement.clientWidth -
             this.margin.left - this.margin.right;
