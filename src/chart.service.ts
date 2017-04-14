@@ -26,7 +26,7 @@ export class ChartService {
      * this can be used to export default modules 
      * @memberOf ChartService
      */
-    public D3() {
+    public D3Module() {
         this.d3 = d3;
         return this.d3;
     }
@@ -40,7 +40,6 @@ export class ChartService {
      * @memberOf ChartService
      */
     createsvg(element: any) {
-
         this.htmlElement = element;
         this.width = this.htmlElement.clientWidth -
             this.margin.left - this.margin.right;
