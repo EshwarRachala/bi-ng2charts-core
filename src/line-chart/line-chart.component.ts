@@ -37,13 +37,13 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
 
         this.chart
             .createsvg(this.target.nativeElement)
-            .xScale(ScaleType.Time)
+            .xScale(ScaleType.Linear)
             .range(Axis.x)
-            .Extent(data, Axis.x)
+            .Max(data, Axis.x)
             .xAxis()
             .yScale(ScaleType.Linear)
             .range(Axis.y)
-            .Extent(data, Axis.y)
+            .Max(data, Axis.y)
             .yAxis()
             .Line(data);
     }
