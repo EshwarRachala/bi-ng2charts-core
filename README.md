@@ -12,10 +12,10 @@ once installed
 
 Using bar chart
 
-'<bar-chart [settings]="settings" [data]="dataset"></bar-chart>`
+`<bar-chart [settings]="settings" [data]="dataset"></bar-chart>`
 
 
-Creating Charts using Service
+Creating Charts using ChartService
 
 @Inject chart service
 
@@ -24,7 +24,8 @@ Creating Charts using Service
     templateUrl: './bar-chart.component.html',
     styleUrls: ['./bar-chart.component.css'],
     providers: [ChartService]
-})` 
+})`
+
 
 `public chart: ChartService;
 
@@ -49,9 +50,9 @@ Render chart
             .Bar(data);
     }`
 
-## for more details reference bar-chart component in src folder
-    
-## to resolve d3 we need to Install typings add --g to install globally
+### for more details reference bar-chart component in src folder
+
+### to resolve d3 Install typings (add --g to install globally)
 `typings install  --save dt~d3;`
 
 
