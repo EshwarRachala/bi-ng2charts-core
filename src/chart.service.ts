@@ -14,6 +14,11 @@ export class ChartService {
     private xValue: any;
     private yValue: any;
 
+    /**
+     * Creates an instance of ChartService.
+     * 
+     * @memberOf ChartService
+     */
     constructor() {
         this.margin = { top: 20, right: 20, bottom: 70, left: 70 };
     }
@@ -21,7 +26,7 @@ export class ChartService {
     /**
      * 
      * 
-     * @returns D3 service 
+     * @returns d3 Core modules 
      * this can be used to export default modules 
      * @memberOf ChartService
      */
@@ -38,7 +43,7 @@ export class ChartService {
      * @memberOf ChartService
      */
     createsvg(element: any) {
-        
+
         this.htmlElement = element;
         this.width = this.htmlElement.clientWidth -
             this.margin.left - this.margin.right;
@@ -179,6 +184,20 @@ export class ChartService {
             .attr('y', (d: any) => this.y(d.text))
             .attr('height', this.y.bandwidth())
             .attr('width', (d: any) => this.x(d.value));
+    }
+
+
+    public Line(data: any) {
+
+        const line = d3.line()
+            .x((d: any) => this.x(d.text))
+            .y((d: any) => this.y(d.value));
+            
+        this.svg
+            .append('path')
+            .data([data])
+            .attr('class', 'line')
+            .attr('d', line);
     }
 
     public Map(data: any[], axis: Axis) {
