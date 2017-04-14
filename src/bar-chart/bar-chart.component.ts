@@ -39,12 +39,10 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
             .xScale(ScaleType.Linear)
             .range(Axis.x)
             .Max(data, Axis.x)
-            .domain(Axis.x)
+            .xAxis()
             .yScale(ScaleType.Band)
             .range(Axis.y)
             .Map(data, Axis.y)
-            .domain(Axis.y)
-            .xAxis()
             .yAxis()
             .Bar(data);
     }

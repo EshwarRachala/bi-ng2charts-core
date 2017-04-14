@@ -81,21 +81,6 @@ export class ChartService {
         return this;
     }
 
-    public domain(axis: Axis) {
-debugger;
-        switch (axis) {
-            case Axis.x:
-                this.x.domain([0, this.xValue]);
-             //   this.x.domain(this.xValue);
-                break;
-            case Axis.y:
-                this.y.domain(this.yValue);
-                break;
-        }
-
-        return this;
-    }
-
     public xAxis() {
         this.svg
             .append('g')
@@ -142,9 +127,11 @@ debugger;
         switch (axis) {
             case Axis.x:
                 this.xValue = data.map((d: any) => d.text);
+                this.x.domain(this.xValue);
                 break;
             case Axis.y:
                 this.yValue = data.map((d: any) => d.text);
+                this.y.domain(this.yValue);
                 break;
         }
 
@@ -156,9 +143,11 @@ debugger;
         switch (axis) {
             case Axis.x:
                 this.xValue = d3.extent(data, (d: any) => d.value);
+                 this.x.domain(this.xValue);
                 break;
             case Axis.y:
                 this.yValue = d3.extent(data, (d: any) => d.text);
+                 this.y.domain(this.yValue);
                 break;
         }
 
@@ -166,13 +155,14 @@ debugger;
     }
 
     public Max(data: any, axis: Axis) {
-
         switch (axis) {
             case Axis.x:
-                this.xValue = d3.max(data, (d: any) => d.value)
+                this.xValue = d3.max(data, (d: any) => d.value);
+                this.x.domain([0, this.xValue]);
                 break;
             case Axis.y:
-                this.yValue = d3.max(data, (d: any) => d.value)
+                this.yValue = d3.max(data, (d: any) => d.value);
+                this.y.domain([0, this.yValue]);
                 break;
         }
 
