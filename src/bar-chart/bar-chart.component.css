@@ -1,44 +1,10 @@
 .barchart {
     width: 100%;
-    display: block;
+    display: block; 
 }
 
-.barchart .axis path,
-.barchart .axis line {
-    fill: none;
-    stroke: rgba(0, 0, 0, 0.2);
-    color: rgba(0, 0, 0, 0.2);
-    shape-rendering: crispEdges;
-}
-
-.barchart .axis text {
-    font-size: 11px;
-    fill: rgba(0, 0, 0, 0.9);
-}
-
-.barchart .grid .tick {
-    stroke: rgba(0, 0, 0, 0.1);
-    opacity: 0.3;
-}
-
-.barchart .grid path {
-    stroke-width: 0;
-}
-
-.barchart .grid .tick {
-    stroke: rgba(0, 0, 0, 0.1);
-    opacity: 0.3;
-}
-
-.barchart .grid path {
-    stroke-width: 0;
-}
-
-.barchart .color-label {
-    display: inline;
-}
-
-.barchart>.bar {
+ 
+.barchart > .bar {
     fill: red;
     background-color: green;
 }

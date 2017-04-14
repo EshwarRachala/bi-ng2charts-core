@@ -82,10 +82,11 @@ export class ChartService {
     }
 
     public domain(axis: Axis) {
-
+debugger;
         switch (axis) {
             case Axis.x:
                 this.x.domain([0, this.xValue]);
+             //   this.x.domain(this.xValue);
                 break;
             case Axis.y:
                 this.y.domain(this.yValue);
@@ -136,7 +137,7 @@ export class ChartService {
             .attr('width', (d: any) => this.x(d.value));
     }
 
-    public dataMap(data: any[], axis: Axis) {
+    public Map(data: any[], axis: Axis) {
 
         switch (axis) {
             case Axis.x:
@@ -144,6 +145,20 @@ export class ChartService {
                 break;
             case Axis.y:
                 this.yValue = data.map((d: any) => d.text);
+                break;
+        }
+
+        return this;
+    }
+
+    public Extent(data: any[], axis: Axis) {
+
+        switch (axis) {
+            case Axis.x:
+                this.xValue = d3.extent(data, (d: any) => d.value);
+                break;
+            case Axis.y:
+                this.yValue = d3.extent(data, (d: any) => d.text);
                 break;
         }
 

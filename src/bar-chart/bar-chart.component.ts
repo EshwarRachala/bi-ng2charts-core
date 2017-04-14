@@ -42,7 +42,7 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
             .domain(Axis.x)
             .yScale(ScaleType.Band)
             .range(Axis.y)
-            .dataMap(data, Axis.y)
+            .Map(data, Axis.y)
             .domain(Axis.y)
             .xAxis()
             .yAxis()
