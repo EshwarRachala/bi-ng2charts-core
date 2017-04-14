@@ -48,6 +48,9 @@ Render chart
             .yAxis()
             .Bar(data);
     }`
+
+## for more details reference bar-chart component in src folder
+    
 ## to resolve d3 we need to Install typings add --g to install globally
 `typings install  --save dt~d3;`
 
