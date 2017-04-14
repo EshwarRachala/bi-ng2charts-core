@@ -9,6 +9,7 @@ export class ChartService {
     private height: any;
     private margin: any;
     htmlElement: HTMLElement;
+    private d3: any;
     private x: any = d3.scaleLinear();
     private y: any = d3.scaleLinear();
     private xValue: any;
@@ -18,11 +19,33 @@ export class ChartService {
         this.margin = { top: 20, right: 20, bottom: 70, left: 70 };
     }
 
+    /**
+     * 
+     * 
+     * @returns D3 service 
+     * this can be used to export default modules 
+     * @memberOf ChartService
+     */
+    public D3() {
+        this.d3 = d3;
+        return this.d3;
+    }
+
+    /**
+     * 
+     * 
+     * @param {*} element 
+     * @returns 
+     * 
+     * @memberOf ChartService
+     */
     createsvg(element: any) {
 
         this.htmlElement = element;
-        this.width = this.htmlElement.clientWidth - this.margin.left - this.margin.right;
-        this.height = this.htmlElement.clientWidth * 0.5 - this.margin.top - this.margin.bottom;
+        this.width = this.htmlElement.clientWidth -
+            this.margin.left - this.margin.right;
+        this.height = this.htmlElement.clientWidth * 0.5 -
+            this.margin.top - this.margin.bottom;
 
         this.svg = d3.select(this.htmlElement)
             .append('svg')
@@ -35,6 +58,14 @@ export class ChartService {
         return this;
     }
 
+    /**
+     * 
+     * 
+     * @param {ScaleType} type 
+     * @returns 
+     * 
+     * @memberOf ChartService
+     */
     public xScale(type: ScaleType) {
         switch (type) {
             case ScaleType.Linear:
@@ -51,6 +82,14 @@ export class ChartService {
         return this;
     }
 
+    /**
+     * 
+     * 
+     * @param {ScaleType} type 
+     * @returns 
+     * 
+     * @memberOf ChartService
+     */
     public yScale(type: ScaleType) {
         switch (type) {
             case ScaleType.Linear:
@@ -67,6 +106,14 @@ export class ChartService {
         return this;
     }
 
+    /**
+     * 
+     * 
+     * @param {Axis} axis 
+     * @returns 
+     * 
+     * @memberOf ChartService
+     */
     public range(axis: Axis) {
 
         switch (axis) {
@@ -81,6 +128,13 @@ export class ChartService {
         return this;
     }
 
+    /**
+     * 
+     * 
+     * @returns 
+     * 
+     * @memberOf ChartService
+     */
     public xAxis() {
         this.svg
             .append('g')
@@ -96,6 +150,13 @@ export class ChartService {
         return this;
     }
 
+    /**
+     * 
+     * 
+     * @returns 
+     * 
+     * @memberOf ChartService
+     */
     public yAxis() {
         this.svg
             .append('g')
@@ -143,11 +204,11 @@ export class ChartService {
         switch (axis) {
             case Axis.x:
                 this.xValue = d3.extent(data, (d: any) => d.value);
-                 this.x.domain(this.xValue);
+                this.x.domain(this.xValue);
                 break;
             case Axis.y:
                 this.yValue = d3.extent(data, (d: any) => d.text);
-                 this.y.domain(this.yValue);
+                this.y.domain(this.yValue);
                 break;
         }
 

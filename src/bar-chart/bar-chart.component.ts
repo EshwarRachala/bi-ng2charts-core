@@ -34,6 +34,7 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
     }
 
     render(data: any) {
+
         this.chart
             .createsvg(this.target.nativeElement)
             .xScale(ScaleType.Linear)
