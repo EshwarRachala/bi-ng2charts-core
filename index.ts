@@ -5,7 +5,6 @@ import { BarChartComponent } from './src/bar-chart/bar-chart.component';
 import { ChartService } from './src/chart.service';
 
 export * from './src/chart.service';
-export * from './src/chart.component';
 export * from './src/enums';
 
 @NgModule({
@@ -20,10 +19,10 @@ export * from './src/enums';
 
 })
 
-export class Ng2ChartsModule {
+export class ChartsModule {
   static forRoot(chartservice: ChartService): ModuleWithProviders {
     return {
-      ngModule: Ng2ChartsModule,
+      ngModule: ChartsModule,
       providers: [ChartService]
     };
   }
