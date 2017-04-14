@@ -1,14 +1,14 @@
 import { Component, Input, OnChanges, AfterViewInit, ViewChild }
     from '@angular/core';
 import { ScaleType, Axis } from '../enums';
-import { Chart } from '../d3-chart.component';
+import { ChartService } from '../chart.service';
 
 
 @Component({
     selector: 'bar-chart',
     templateUrl: './bar-chart.component.html',
     styleUrls: ['./bar-chart.component.css'],
-    providers: [Chart]
+    providers: [ChartService]
 })
 
 export class BarChartComponent implements OnChanges, AfterViewInit {
@@ -17,29 +17,23 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
     @Input() data: Array<{ text: string, value: number }>;
     @ViewChild('target') target: any;
 
-    public chart: Chart;
+    public chart: ChartService;
 
-    constructor(chartService:Chart) {
+    constructor(chartService: ChartService) {
         this.chart = chartService;
     }
 
     ngOnChanges(changes: any): void {
         // tslint:disable-next-line:curly
         if (!changes.data) return;
-        debugger;
         this.data = changes.data.currentValue;
-        //   this.chart = new Chart(this.target.nativeElement);
-        console.log(this.data);
         this.render(this.data);
     }
 
     ngAfterViewInit() {
-        //  this.chart = new Chart(this.target.nativeElement);
-        //  this.render(this.data);
     }
 
     render(data: any) {
-        debugger;
         this.chart
             .createsvg(this.target.nativeElement)
             .xScale(ScaleType.Linear)

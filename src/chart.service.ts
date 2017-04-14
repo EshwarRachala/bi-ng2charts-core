@@ -1,7 +1,9 @@
+import { Injectable } from '@angular/core';
 import * as d3 from "d3";
 import { ScaleType, Axis } from './enums';
 
-export class Chart {
+@Injectable()
+export class ChartService {
     private svg: any;
     private width: any;
     private height: any;
@@ -12,14 +14,12 @@ export class Chart {
     private xValue: any;
     private yValue: any;
 
-
     constructor() {
         this.margin = { top: 20, right: 20, bottom: 70, left: 70 };
-        //this.htmlElement = element;
     }
 
     createsvg(element: any) {
-        debugger;
+
         this.htmlElement = element;
         this.width = this.htmlElement.clientWidth - this.margin.left - this.margin.right;
         this.height = this.htmlElement.clientWidth * 0.5 - this.margin.top - this.margin.bottom;
@@ -36,7 +36,6 @@ export class Chart {
     }
 
     public xScale(type: ScaleType) {
-        //   debugger;
         switch (type) {
             case ScaleType.Linear:
                 this.x = d3.scaleLinear();
@@ -53,7 +52,6 @@ export class Chart {
     }
 
     public yScale(type: ScaleType) {
-        //   debugger;
         switch (type) {
             case ScaleType.Linear:
                 this.y = d3.scaleLinear();
