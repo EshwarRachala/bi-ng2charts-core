@@ -33,7 +33,6 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
         const format = this.d3.timeParse("%d-%b-%y");
 
         this.data.forEach((d: any) => {
-            debugger;
             d.text = format(d.text);
             d.value = +d.value;
         });

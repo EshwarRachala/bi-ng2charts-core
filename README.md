@@ -36,19 +36,18 @@ Creating Charts using ChartService
 
 Render chart 
 
-` render(data: any) {
-        this.chart
+`  this.chart
             .createsvg(this.target.nativeElement)
-            .xScale(ScaleType.Linear)
-            .range(Axis.x)
-            .Max(data, Axis.x)
-            .xAxis()
-            .yScale(ScaleType.Band)
-            .range(Axis.y)
-            .Map(data, Axis.y)
-            .yAxis()
-            .Bar(data);
-    }`
+            .XScale(ScaleType.Time)
+            .RangeRound(Axis.x)
+            .Extent(data, Axis.x, ValueType.text)
+            .XAxis()
+            .YScale(ScaleType.Linear)
+            .RangeRound(Axis.y)
+            .Extent(data, Axis.y, ValueType.value)
+            .YAxis()
+            .Line(data, ValueType.text, ValueType.value);
+`
 
 ### for more details reference bar-chart component in src folder
 
