@@ -231,17 +231,21 @@ export class ChartService {
         switch (axis) {
 
             case Axis.x:
+
                 this.xvalue = data.map((d: any) =>
                     (val === ValueType.text) ? d.text : d.value);
 
                 this.xscale.domain(this.xvalue);
+
                 break;
 
             case Axis.y:
+
                 this.yvalue = data.map((d: any) =>
                     (val === ValueType.text) ? d.text : d.value);
 
                 this.yscale.domain(this.yvalue);
+
                 break;
         }
 
@@ -255,15 +259,21 @@ export class ChartService {
         switch (axis) {
 
             case Axis.x:
+
                 this.xvalue = d3.extent(data, (d: any) =>
                     (val === ValueType.text) ? d.text : d.value);
+
                 this.xscale.domain(this.xvalue);
+
                 break;
 
             case Axis.y:
+
                 this.yvalue = d3.extent(data, (d: any) =>
                     (val === ValueType.text) ? d.text : d.value);
+
                 this.yscale.domain(this.yvalue);
+
                 break;
 
         }
@@ -274,15 +284,21 @@ export class ChartService {
     public Max(data: any, axis: Axis, val: ValueType) {
 
         switch (axis) {
+
             case Axis.x:
+
                 this.xvalue = d3.max(data, (d: any) =>
                     (val === ValueType.text) ? d.text : d.value);
                 this.xscale.domain([0, this.xvalue]);
+
                 break;
+
             case Axis.y:
+
                 this.yvalue = d3.max(data, (d: any) =>
                     (val === ValueType.text) ? d.text : d.value);
                 this.yscale.domain([0, this.yvalue]);
+                
                 break;
         }
 
