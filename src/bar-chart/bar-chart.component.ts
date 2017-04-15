@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, AfterViewInit, ViewChild }
     from '@angular/core';
-import { ScaleType, Axis, Value } from '../enums';
+import { ScaleType, Axis, ValueType } from '../enums';
 import { ChartService } from '../chart.service';
 
 
@@ -37,14 +37,14 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
 
         this.chart
             .createsvg(this.target.nativeElement)
-            .xScale(ScaleType.Linear)
-            .range(Axis.x)
-            .Max(data, Axis.x, Value.value)
-            .xAxis()
-            .yScale(ScaleType.Band)
-            .range(Axis.y)
-            .Map(data, Axis.y, Value.text)
-            .yAxis()
-            .Bar(data, Value.value, Value.text);
+            .XScale(ScaleType.Linear)
+            .Range(Axis.x)
+            .Max(data, Axis.x, ValueType.value)
+            .XAxis()
+            .YScale(ScaleType.Band)
+            .Range(Axis.y)
+            .Map(data, Axis.y, ValueType.text)
+            .YAxis()
+            .Bar(data, ValueType.value, ValueType.text);
     }
 }
