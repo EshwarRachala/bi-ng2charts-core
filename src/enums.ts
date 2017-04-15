@@ -9,3 +9,8 @@ export enum Axis {
     y = 2,
     z = 3
 }
+
+export enum Value {
+    text = 1,
+    value = 2
+}

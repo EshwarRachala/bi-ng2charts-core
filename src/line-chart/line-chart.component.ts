@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, AfterViewInit, ViewChild }
     from '@angular/core';
-import { ScaleType, Axis } from '../enums';
+import { ScaleType, Axis, Value } from '../enums';
 import { ChartService } from '../chart.service';
 
 
@@ -18,9 +18,11 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
     @ViewChild('target') target: any;
 
     public chart: ChartService;
+    private d3: any;
 
     constructor(chartService: ChartService) {
         this.chart = chartService;
+        this.d3 = this.chart.D3Module();
     }
 
     ngOnChanges(changes: any): void {
@@ -31,6 +33,7 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
     }
 
     ngAfterViewInit() {
+
     }
 
     render(data: any) {
@@ -39,12 +42,12 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
             .createsvg(this.target.nativeElement)
             .xScale(ScaleType.Linear)
             .range(Axis.x)
-            .Max(data, Axis.x)
+            .Extent(data, Axis.x, Value.text)
             .xAxis()
             .yScale(ScaleType.Linear)
             .range(Axis.y)
-            .Max(data, Axis.y)
+            .Max(data, Axis.y, Value.value)
             .yAxis()
-            .Line(data);
+            .Line(data, Value.text, Value.value);
     }
 }

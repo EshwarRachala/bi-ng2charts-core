@@ -1,7 +1,14 @@
 import { Injectable } from '@angular/core';
 import * as d3 from "d3";
-import { ScaleType, Axis } from './enums';
+import { ScaleType, Axis, Value } from './enums';
 
+
+/**
+ * 
+ * 
+ * @export
+ * @class ChartService
+ */
 @Injectable()
 export class ChartService {
     private svg: any;
@@ -94,7 +101,9 @@ export class ChartService {
      * @memberOf ChartService
      */
     public yScale(type: ScaleType) {
+
         switch (type) {
+
             case ScaleType.Linear:
                 this.y = d3.scaleLinear();
                 break;
@@ -120,9 +129,11 @@ export class ChartService {
     public range(axis: Axis) {
 
         switch (axis) {
+
             case Axis.x:
                 this.x.range([0, this.width]);
                 break;
+
             case Axis.y:
                 this.y.range([this.height, 0]);
                 break;
@@ -161,6 +172,7 @@ export class ChartService {
      * @memberOf ChartService
      */
     public yAxis() {
+
         this.svg
             .append('g')
             .attr('class', 'y axis')
@@ -174,41 +186,54 @@ export class ChartService {
         return this;
     }
 
-    public Bar(data: any) {
+    public Bar(data: any, xval: Value, yval: Value) {
+
         this.svg
             .selectAll('.bar')
             .data(data)
             .enter()
             .append('rect')
             .attr('class', 'bar')
-            .attr('y', (d: any) => this.y(d.text))
+            .attr('y', (d: any) => this.y(
+                (yval === Value.text) ? d.text : d.value
+            ))
             .attr('height', this.y.bandwidth())
-            .attr('width', (d: any) => this.x(d.value));
+            .attr('width', (d: any) => this.x(
+                (xval === Value.text) ? d.text : d.value
+            ));
+
+        return this;
     }
 
 
-    public Line(data: any) {
+    public Line(data: any, xval: Value, yval: Value) {
 
         const line = d3.line()
-            .x((d: any) => this.x(d.text))
-            .y((d: any) => this.y(d.value));
-            
+            .x((d: any) => this.x((xval === Value.text) ? d.text : d.value))
+            .y((d: any) => this.y((yval === Value.text) ? d.text : d.value));
+
         this.svg
             .append('path')
             .data([data])
             .attr('class', 'line')
             .attr('d', line);
+
+        return this;
     }
 
-    public Map(data: any[], axis: Axis) {
+    public Map(data: any[], axis: Axis, val: Value) {
 
         switch (axis) {
+
             case Axis.x:
-                this.xValue = data.map((d: any) => d.text);
+                this.xValue = data.map((d: any) =>
+                    (val === Value.text) ? d.text : d.value);
                 this.x.domain(this.xValue);
                 break;
+
             case Axis.y:
-                this.yValue = data.map((d: any) => d.text);
+                this.yValue = data.map((d: any) =>
+                    (val === Value.text) ? d.text : d.value);
                 this.y.domain(this.yValue);
                 break;
         }
@@ -216,30 +241,40 @@ export class ChartService {
         return this;
     }
 
-    public Extent(data: any[], axis: Axis) {
+    public Extent(data: any[], axis: Axis, val: Value) {
+
+        debugger;
 
         switch (axis) {
+
             case Axis.x:
-                this.xValue = d3.extent(data, (d: any) => d.value);
+                this.xValue = d3.extent(data, (d: any) =>
+                    (val === Value.text) ? d.text : d.value);
                 this.x.domain(this.xValue);
                 break;
+
             case Axis.y:
-                this.yValue = d3.extent(data, (d: any) => d.text);
+                this.yValue = d3.extent(data, (d: any) =>
+                    (val === Value.text) ? d.text : d.value);
                 this.y.domain(this.yValue);
                 break;
+
         }
 
         return this;
     }
 
-    public Max(data: any, axis: Axis) {
+    public Max(data: any, axis: Axis, val: Value) {
+
         switch (axis) {
             case Axis.x:
-                this.xValue = d3.max(data, (d: any) => d.value);
+                this.xValue = d3.max(data, (d: any) =>
+                    (val === Value.text) ? d.text : d.value);
                 this.x.domain([0, this.xValue]);
                 break;
             case Axis.y:
-                this.yValue = d3.max(data, (d: any) => d.value);
+                this.yValue = d3.max(data, (d: any) =>
+                    (val === Value.text) ? d.text : d.value);
                 this.y.domain([0, this.yValue]);
                 break;
         }
