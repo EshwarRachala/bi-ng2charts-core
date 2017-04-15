@@ -1,7 +1,8 @@
 import { Component, Input, OnChanges, AfterViewInit, ViewChild }
     from '@angular/core';
-import { ScaleType, Axis, ValueType } from '../enums';
+import { ScaleType, Axis, ColName } from '../enums';
 import { ChartService } from '../chart.service';
+import * as d3 from "@types/d3";
 
 
 @Component({
@@ -16,11 +17,13 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
     @Input() settings: any = {};
     @Input() data: Array<{ text: string, value: number }>;
     @ViewChild('target') target: any;
+    d3: typeof d3;
 
     public chart: ChartService;
 
     constructor(chartService: ChartService) {
         this.chart = chartService;
+        this.d3 = this.chart.D3Module();
     }
 
     ngOnChanges(changes: any): void {
@@ -34,17 +37,19 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
     }
 
     render(data: any) {
-
+        debugger;
         this.chart
             .createsvg(this.target.nativeElement)
-            .XScale(ScaleType.Linear)
+            .Scale(ScaleType.Linear, Axis.x)
             .Range(Axis.x)
-            .Max(data, Axis.x, ValueType.value)
-            .XAxis()
-            .YScale(ScaleType.Band)
+            .MaxFunc(Axis.x, this.d3.max(this.data, (d: any) => d.value))
+            .Axis(Axis.x)
+            .Scale(ScaleType.Band, Axis.y)
             .Range(Axis.y)
-            .Map(data, Axis.y, ValueType.text)
-            .YAxis()
-            .Bar(data, ValueType.value, ValueType.text);
+            .Map(data, Axis.y, ColName.text)
+            .Axis(Axis.y)
+            .Bar(data, ColName.value, ColName.text);
+
+
     }
 }

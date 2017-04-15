@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, AfterViewInit, ViewChild }
     from '@angular/core';
-import { ScaleType, Axis, ValueType } from '../enums';
+import { ScaleType, Axis, ColName } from '../enums';
 import { ChartService } from '../chart.service';
 
 
@@ -48,14 +48,14 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
 
         this.chart
             .createsvg(this.target.nativeElement)
-            .XScale(ScaleType.Time)
+            .Scale(ScaleType.Time, Axis.x)
             .RangeRound(Axis.x)
-            .Extent(data, Axis.x, ValueType.text)
-            .XAxis()
-            .YScale(ScaleType.Linear)
+            .Extent(data, Axis.x, ColName.text)
+            .Axis(Axis.x)
+            .Scale(ScaleType.Linear, Axis.y)
             .RangeRound(Axis.y)
-            .Extent(data, Axis.y, ValueType.value)
-            .YAxis()
-            .Line(data, ValueType.text, ValueType.value);
+            .Extent(data, Axis.y, ColName.value)
+            .Axis(Axis.y)
+            .Line(data, ColName.text, ColName.value);
     }
 }

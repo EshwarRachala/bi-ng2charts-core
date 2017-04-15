@@ -10,7 +10,7 @@ export enum Axis {
     z = 3
 }
 
-export enum ValueType {
+export enum ColName {
     text = 1,
     value = 2
 }

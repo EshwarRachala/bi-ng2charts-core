@@ -50,22 +50,22 @@ import {ChartsModule, ChartService } from 'ng2charts'
         this.d3 = this.chart.D3Module();
     }
 
-   this.chart
+        this.chart
             .createsvg(this.target.nativeElement)
-            .XScale(ScaleType.Time)
+            .Scale(ScaleType.Time, Axis.x)
             .RangeRound(Axis.x)
             .Extent(data, Axis.x, ValueType.text)
-            .XAxis()
-            .YScale(ScaleType.Linear)
+            .Axis(Axis.x)
+            .Scale(ScaleType.Linear, Axis.y)
             .RangeRound(Axis.y)
             .Extent(data, Axis.y, ValueType.value)
-            .YAxis()
-            .Line(data, ValueType.text, ValueType.value);   
+            .Axis(Axis.y)
+            .Line(data, ValueType.text, ValueType.value); 
 ```
 
 ### for more details reference bar-chart component in src folder
 
-### to resolve d3 Install typings (add --g to install globally)
+### to resolve d3, Install typings (add --g to install globally)
 `typings install  --save dt~d3;`
 
 
