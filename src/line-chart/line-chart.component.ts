@@ -29,6 +29,15 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
         // tslint:disable-next-line:curly
         if (!changes.data) return;
         this.data = changes.data.currentValue;
+
+        const format = this.d3.timeParse("%d-%b-%y");
+
+        this.data.forEach((d: any) => {
+            debugger;
+            d.text = format(d.text);
+            d.value = +d.value;
+        });
+
         this.render(this.data);
     }
 
@@ -40,13 +49,13 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
 
         this.chart
             .createsvg(this.target.nativeElement)
-            .XScale(ScaleType.Linear)
-            .Range(Axis.x)
+            .XScale(ScaleType.Time)
+            .RangeRound(Axis.x)
             .Extent(data, Axis.x, ValueType.text)
             .XAxis()
             .YScale(ScaleType.Linear)
-            .Range(Axis.y)
-            .Max(data, Axis.y, ValueType.value)
+            .RangeRound(Axis.y)
+            .Extent(data, Axis.y, ValueType.value)
             .YAxis()
             .Line(data, ValueType.text, ValueType.value);
     }

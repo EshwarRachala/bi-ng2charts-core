@@ -106,7 +106,6 @@ export class ChartService {
     public YScale(type: ScaleType) {
 
         switch (type) {
-
             case ScaleType.Linear:
                 this.yscale = d3.scaleLinear();
                 break;
@@ -132,13 +131,25 @@ export class ChartService {
     public Range(axis: Axis) {
 
         switch (axis) {
-
             case Axis.x:
                 this.xscale.range([0, this.width]);
                 break;
-
             case Axis.y:
                 this.yscale.range([this.height, 0]);
+                break;
+        }
+
+        return this;
+    }
+
+    public RangeRound(axis: Axis) {
+
+        switch (axis) {
+            case Axis.x:
+                this.xscale.rangeRound([0, this.width]);
+                break;
+            case Axis.y:
+                this.yscale.rangeRound([this.height, 0]);
                 break;
         }
 
@@ -221,6 +232,11 @@ export class ChartService {
             .append('path')
             .data([data])
             .attr('class', 'line')
+            .attr("fill", "none")
+            .attr("stroke", "steelblue")
+            .attr("stroke-linejoin", "round")
+            .attr("stroke-linecap", "round")
+            .attr("stroke-width", 1.5)
             .attr('d', line);
 
         return this;
@@ -229,21 +245,16 @@ export class ChartService {
     public Map(data: any[], axis: Axis, val: ValueType) {
 
         switch (axis) {
-
             case Axis.x:
-
                 this.xvalue = data.map((d: any) =>
                     (val === ValueType.text) ? d.text : d.value);
-
                 this.xscale.domain(this.xvalue);
 
                 break;
 
             case Axis.y:
-
                 this.yvalue = data.map((d: any) =>
                     (val === ValueType.text) ? d.text : d.value);
-
                 this.yscale.domain(this.yvalue);
 
                 break;
@@ -254,26 +265,17 @@ export class ChartService {
 
     public Extent(data: any[], axis: Axis, val: ValueType) {
 
-        debugger;
-
         switch (axis) {
-
             case Axis.x:
-
                 this.xvalue = d3.extent(data, (d: any) =>
                     (val === ValueType.text) ? d.text : d.value);
-
                 this.xscale.domain(this.xvalue);
-
                 break;
 
             case Axis.y:
-
                 this.yvalue = d3.extent(data, (d: any) =>
                     (val === ValueType.text) ? d.text : d.value);
-
                 this.yscale.domain(this.yvalue);
-
                 break;
 
         }
@@ -284,21 +286,16 @@ export class ChartService {
     public Max(data: any, axis: Axis, val: ValueType) {
 
         switch (axis) {
-
             case Axis.x:
-
                 this.xvalue = d3.max(data, (d: any) =>
                     (val === ValueType.text) ? d.text : d.value);
                 this.xscale.domain([0, this.xvalue]);
-
                 break;
 
             case Axis.y:
-
                 this.yvalue = d3.max(data, (d: any) =>
                     (val === ValueType.text) ? d.text : d.value);
                 this.yscale.domain([0, this.yvalue]);
-                
                 break;
         }
 
