@@ -9,8 +9,17 @@ with Angular 2 predefined d3 functions
 
 ## Import Library
 
-Run `npm install ng2charts`
-and `import {ChartsModule, ChartService } from 'ng2charts'`
+Run
+
+```js 
+npm install ng2charts
+```
+
+Once installed 
+
+```js 
+import {ChartsModule, ChartService } from 'ng2charts'
+```
 
 
 ## Utilizing Chart components
