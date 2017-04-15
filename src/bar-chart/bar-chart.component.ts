@@ -37,7 +37,6 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
     }
 
     render(data: any) {
-        debugger;
         this.chart
             .createsvg(this.target.nativeElement)
             .Scale(ScaleType.Linear, Axis.x)
@@ -46,7 +45,8 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
             .Axis(Axis.x)
             .Scale(ScaleType.Band, Axis.y)
             .Range(Axis.y)
-            .Map(data, Axis.y, ColName.text)
+            .MapFunc(Axis.y, data.map((d: any) => d.text))
+            //  .Map(data, Axis.y, ColName.text)
             .Axis(Axis.y)
             .Bar(data, ColName.value, ColName.text);
 

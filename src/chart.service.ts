@@ -205,22 +205,44 @@ export class ChartService {
         return this;
     }
 
-    public Map(data: any[], axis: Axis, val: ColName) {
+    public MapFunc(axis: Axis, func: Function) {
+        if (func !== undefined) {
+            switch (axis) {
+                case Axis.x:
+                    this.xvalue = func;
+                    this.xscale.domain(this.xvalue);
 
-        switch (axis) {
-            case Axis.x:
-                this.xvalue = data.map((d: any) =>
-                    (val === ColName.text) ? d.text : d.value);
-                this.xscale.domain(this.xvalue);
+                    break;
 
-                break;
+                case Axis.y:
+                    this.yvalue = func;
+                    this.yscale.domain(this.yvalue);
 
-            case Axis.y:
-                this.yvalue = data.map((d: any) =>
-                    (val === ColName.text) ? d.text : d.value);
-                this.yscale.domain(this.yvalue);
+                    break;
+            }
+        }
 
-                break;
+        return this;
+    }
+
+    public Map(axis: Axis, data: any[], val: ColName) {
+        if (data !== undefined && val !== undefined) {
+            switch (axis) {
+                case Axis.x:
+                    this.xvalue = data.map((d: any) =>
+                        (val === ColName.text) ? d.text : d.value);
+                    this.xscale.domain(this.xvalue);
+
+                    break;
+
+                case Axis.y:
+                    this.yvalue = data.map((d: any) =>
+                        (val === ColName.text) ? d.text : d.value);
+                    this.yscale.domain(this.yvalue);
+
+                    break;
+            }
+
         }
 
         return this;
