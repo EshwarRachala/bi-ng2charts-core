@@ -18,11 +18,9 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
     @ViewChild('target') target: any;
 
     public chart: ChartService;
-    private d3: any;
 
     constructor(chartService: ChartService) {
         this.chart = chartService;
-        this.d3 = this.chart.D3Module();
     }
 
     ngOnChanges(changes: any): void {
@@ -30,7 +28,7 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
         if (!changes.data) return;
         this.data = changes.data.currentValue;
 
-        const format = this.d3.timeParse("%d-%b-%y");
+        const format = this.chart.d3.timeParse("%d-%b-%y");
 
         this.data.forEach((d: any) => {
             d.text = format(d.text);
@@ -46,8 +44,10 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
 
     render(data: any) {
 
+        debugger;
+
         this.chart
-            .createsvg(this.target.nativeElement)
+            .SVG(this.target.nativeElement)
             .Scale(ScaleType.Time, Axis.x)
             .RangeRound(Axis.x)
             .Extent(data, Axis.x, ColName.text)

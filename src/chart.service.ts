@@ -10,17 +10,16 @@ import { ScaleType, Axis, ColName } from './enums';
  */
 @Injectable()
 export class ChartService {
-    private svg: any;
-    private width: any;
-    private height: any;
-    private margin: any;
-
+    public d3: typeof d3;
     private htmlElement: HTMLElement;
-    private xscale: any = d3.scaleLinear();
-    private yscale: any = d3.scaleLinear();
-
-    private xvalue: any;
-    private yvalue: any;
+    public svg: any;
+    public width: any;
+    public height: any;
+    public margin: any;
+    public xscale: any = d3.scaleLinear();
+    public yscale: any = d3.scaleLinear();
+    public xvalue: any;
+    public yvalue: any;
 
 
     /**
@@ -30,17 +29,7 @@ export class ChartService {
      */
     constructor() {
         this.margin = { top: 20, right: 20, bottom: 70, left: 70 };
-    }
-
-    /**
-     * 
-     * 
-     * @returns d3 Core modules 
-     * this can be used to export default modules 
-     * @memberOf ChartService
-     */
-    public D3Module() {
-        return d3;
+        this.d3 = d3;
     }
 
     /**
@@ -51,7 +40,7 @@ export class ChartService {
      * 
      * @memberOf ChartService
      */
-    createsvg(element: any) {
+    SVG(element: any) {
         this.htmlElement = element;
         this.width = this.htmlElement.clientWidth - this.margin.left - this.margin.right;
         this.height = this.htmlElement.clientWidth * 0.5 - this.margin.top - this.margin.bottom;
@@ -67,10 +56,18 @@ export class ChartService {
         return this;
     }
 
+    /**
+     * 
+     * 
+     * @param {ScaleType} type 
+     * @param {Axis} axis 
+     * @returns 
+     * 
+     * @memberOf ChartService
+     */
     public Scale(type: ScaleType, axis: Axis) {
 
         let scl: any;
-
 
         switch (type) {
             case ScaleType.Linear:
@@ -118,6 +115,14 @@ export class ChartService {
         return this;
     }
 
+    /**
+     * 
+     * 
+     * @param {Axis} axis 
+     * @returns 
+     * 
+     * @memberOf ChartService
+     */
     public RangeRound(axis: Axis) {
 
         switch (axis) {
@@ -132,6 +137,14 @@ export class ChartService {
         return this;
     }
 
+    /**
+     * 
+     * 
+     * @param {Axis} axis 
+     * @returns 
+     * 
+     * @memberOf ChartService
+     */
     public Axis(axis: Axis) {
 
         switch (axis) {
@@ -163,7 +176,17 @@ export class ChartService {
         return this;
     }
 
-    public Bar(data: any, xval: ColName, yval: ColName) {
+    /**
+     * 
+     * 
+     * @param {any[]} data 
+     * @param {ColName} xval 
+     * @param {ColName} yval 
+     * @returns 
+     * 
+     * @memberOf ChartService
+     */
+    public Bar(data: any[], xval: ColName, yval: ColName) {
 
         this.svg
             .selectAll('.bar')
@@ -182,7 +205,16 @@ export class ChartService {
         return this;
     }
 
-
+    /**
+     * 
+     * 
+     * @param {any[]} data 
+     * @param {ColName} xval 
+     * @param {ColName} yval 
+     * @returns 
+     * 
+     * @memberOf ChartService
+     */
     public Line(data: any[], xval: ColName, yval: ColName) {
 
         const line = d3.line()
@@ -205,6 +237,15 @@ export class ChartService {
         return this;
     }
 
+    /**
+     * 
+     * 
+     * @param {Axis} axis 
+     * @param {Function} func 
+     * @returns 
+     * 
+     * @memberOf ChartService
+     */
     public MapFunc(axis: Axis, func: Function) {
         if (func !== undefined) {
             switch (axis) {
@@ -225,6 +266,16 @@ export class ChartService {
         return this;
     }
 
+    /**
+     * 
+     * 
+     * @param {Axis} axis 
+     * @param {any[]} data 
+     * @param {ColName} val 
+     * @returns 
+     * 
+     * @memberOf ChartService
+     */
     public Map(axis: Axis, data: any[], val: ColName) {
         if (data !== undefined && val !== undefined) {
             switch (axis) {
@@ -248,6 +299,16 @@ export class ChartService {
         return this;
     }
 
+    /**
+     * 
+     * 
+     * @param {any[]} data 
+     * @param {Axis} axis 
+     * @param {ColName} val 
+     * @returns 
+     * 
+     * @memberOf ChartService
+     */
     public Extent(data: any[], axis: Axis, val: ColName) {
 
         switch (axis) {
@@ -268,7 +329,44 @@ export class ChartService {
         return this;
     }
 
-    public Max(data: any[], axis: Axis, val: ColName) {
+    /**
+     * 
+     * 
+     * @param {Axis} axis 
+     * @param {Function} func 
+     * @returns 
+     * 
+     * @memberOf ChartService
+     */
+    public ExtentFunc(axis: Axis, func: Function) {
+
+        switch (axis) {
+            case Axis.x:
+                this.xvalue = func;
+                this.xscale.domain(this.xvalue);
+                break;
+
+            case Axis.y:
+                this.yvalue = func;
+                this.yscale.domain(this.yvalue);
+                break;
+
+        }
+
+        return this;
+    }
+
+    /**
+     * 
+     * 
+     * @param {any[]} data 
+     * @param {Axis} axis 
+     * @param {ColName} val 
+     * @returns {*} 
+     * 
+     * @memberOf ChartService
+     */
+    public Max(data: any[], axis: Axis, val: ColName): any {
 
         switch (axis) {
             case Axis.x:
@@ -287,6 +385,15 @@ export class ChartService {
         return this;
     }
 
+    /**
+     * 
+     * 
+     * @param {Axis} axis 
+     * @param {Function} func 
+     * @returns 
+     * 
+     * @memberOf ChartService
+     */
     public MaxFunc(axis: Axis, func: Function) {
 
         switch (axis) {
@@ -303,4 +410,5 @@ export class ChartService {
 
         return this;
     }
+
 }
