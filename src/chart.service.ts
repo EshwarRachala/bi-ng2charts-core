@@ -11,16 +11,14 @@ import { ScaleType, Axis, ColName } from './enums';
 @Injectable()
 export class ChartService {
     public d3: typeof d3;
-    private htmlElement: HTMLElement;
+    public htmlElement: HTMLElement;
     public svg: any;
     public width: any;
     public height: any;
     public margin: any;
     public xscale: any = d3.scaleLinear();
     public yscale: any = d3.scaleLinear();
-    public xvalue: any;
-    public yvalue: any;
-
+  
 
     /**
      * Creates an instance of ChartService.
@@ -241,174 +239,35 @@ export class ChartService {
      * 
      * 
      * @param {Axis} axis 
-     * @param {Function} func 
+     * @param {*} func 
      * @returns 
      * 
      * @memberOf ChartService
      */
-    public MapFunc(axis: Axis, func: Function) {
-        if (func !== undefined) {
+    public Domain(axis: Axis, func: any) {
+        if (typeof (func) === "number") {
             switch (axis) {
                 case Axis.x:
-                    this.xvalue = func;
-                    this.xscale.domain(this.xvalue);
-
+                    this.xscale.domain([0, func]);
                     break;
 
                 case Axis.y:
-                    this.yvalue = func;
-                    this.yscale.domain(this.yvalue);
-
+                    this.yscale.domain([0, func]);
                     break;
+            }
+        } else {
+            switch (axis) {
+                case Axis.x:
+                    this.xscale.domain(func);
+                    break;
+
+                case Axis.y:
+                    this.yscale.domain(func);
+                    break;
+
             }
         }
 
         return this;
     }
-
-    /**
-     * 
-     * 
-     * @param {Axis} axis 
-     * @param {any[]} data 
-     * @param {ColName} val 
-     * @returns 
-     * 
-     * @memberOf ChartService
-     */
-    public Map(axis: Axis, data: any[], val: ColName) {
-        if (data !== undefined && val !== undefined) {
-            switch (axis) {
-                case Axis.x:
-                    this.xvalue = data.map((d: any) =>
-                        (val === ColName.text) ? d.text : d.value);
-                    this.xscale.domain(this.xvalue);
-
-                    break;
-
-                case Axis.y:
-                    this.yvalue = data.map((d: any) =>
-                        (val === ColName.text) ? d.text : d.value);
-                    this.yscale.domain(this.yvalue);
-
-                    break;
-            }
-
-        }
-
-        return this;
-    }
-
-    /**
-     * 
-     * 
-     * @param {any[]} data 
-     * @param {Axis} axis 
-     * @param {ColName} val 
-     * @returns 
-     * 
-     * @memberOf ChartService
-     */
-    public Extent(data: any[], axis: Axis, val: ColName) {
-
-        switch (axis) {
-            case Axis.x:
-                this.xvalue = d3.extent(data, (d: any) =>
-                    (val === ColName.text) ? d.text : d.value);
-                this.xscale.domain(this.xvalue);
-                break;
-
-            case Axis.y:
-                this.yvalue = d3.extent(data, (d: any) =>
-                    (val === ColName.text) ? d.text : d.value);
-                this.yscale.domain(this.yvalue);
-                break;
-
-        }
-
-        return this;
-    }
-
-    /**
-     * 
-     * 
-     * @param {Axis} axis 
-     * @param {Function} func 
-     * @returns 
-     * 
-     * @memberOf ChartService
-     */
-    public ExtentFunc(axis: Axis, func: Function) {
-
-        switch (axis) {
-            case Axis.x:
-                this.xvalue = func;
-                this.xscale.domain(this.xvalue);
-                break;
-
-            case Axis.y:
-                this.yvalue = func;
-                this.yscale.domain(this.yvalue);
-                break;
-
-        }
-
-        return this;
-    }
-
-    /**
-     * 
-     * 
-     * @param {any[]} data 
-     * @param {Axis} axis 
-     * @param {ColName} val 
-     * @returns {*} 
-     * 
-     * @memberOf ChartService
-     */
-    public Max(data: any[], axis: Axis, val: ColName): any {
-
-        switch (axis) {
-            case Axis.x:
-                this.xvalue = d3.max(data, (d: any) =>
-                    (val === ColName.text) ? d.text : d.value);
-                this.xscale.domain([0, this.xvalue]);
-                break;
-
-            case Axis.y:
-                this.yvalue = d3.max(data, (d: any) =>
-                    (val === ColName.text) ? d.text : d.value);
-                this.yscale.domain([0, this.yvalue]);
-                break;
-        }
-
-        return this;
-    }
-
-    /**
-     * 
-     * 
-     * @param {Axis} axis 
-     * @param {Function} func 
-     * @returns 
-     * 
-     * @memberOf ChartService
-     */
-    public MaxFunc(axis: Axis, func: Function) {
-
-        switch (axis) {
-            case Axis.x:
-                this.xvalue = func;
-                this.xscale.domain([0, this.xvalue]);
-                break;
-
-            case Axis.y:
-                this.yvalue = func;
-                this.yscale.domain([0, this.yvalue]);
-                break;
-        }
-
-        return this;
-    }
-
 }
