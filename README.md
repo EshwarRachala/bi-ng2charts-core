@@ -50,17 +50,22 @@ import {ChartsModule, ChartService } from 'ng2charts'
         this.d3 = this.chart.D3Module();
     }
 
+    const line = this.chart.d3.line()
+            .x((d: any) => this.chart.xscale(d.text))
+            .y((d: any) => this.chart.yscale(d.value));
+
+      
         this.chart
-            .createsvg(this.target.nativeElement)
+            .SVG(this.target.nativeElement)
             .Scale(ScaleType.Time, Axis.x)
             .RangeRound(Axis.x)
-            .Extent(data, Axis.x, ValueType.text)
+            .Domain(Axis.x, this.chart.d3.extent(data, (d: any) => d.text))
             .Axis(Axis.x)
             .Scale(ScaleType.Linear, Axis.y)
             .RangeRound(Axis.y)
-            .Extent(data, Axis.y, ValueType.value)
+            .Domain(Axis.y, this.chart.d3.extent(data, (d: any) => d.value))
             .Axis(Axis.y)
-            .Line(data, ValueType.text, ValueType.value); 
+            .Line(data, line);
 ```
 
 ### for more details reference bar-chart component in src folder

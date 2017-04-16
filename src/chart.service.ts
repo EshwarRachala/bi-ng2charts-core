@@ -18,7 +18,7 @@ export class ChartService {
     public margin: any;
     public xscale: any = d3.scaleLinear();
     public yscale: any = d3.scaleLinear();
-  
+
 
     /**
      * Creates an instance of ChartService.
@@ -213,13 +213,7 @@ export class ChartService {
      * 
      * @memberOf ChartService
      */
-    public Line(data: any[], xval: ColName, yval: ColName) {
-
-        const line = d3.line()
-            .x((d: any) => this.xscale(
-                (xval === ColName.text) ? d.text : d.value))
-            .y((d: any) => this.yscale(
-                (yval === ColName.text) ? d.text : d.value));
+    public Line(data: any[], line: any) {
 
         this.svg
             .append('path')

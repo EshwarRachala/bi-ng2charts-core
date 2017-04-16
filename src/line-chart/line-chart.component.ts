@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, AfterViewInit, ViewChild }
     from '@angular/core';
-import { ScaleType, Axis, ColName } from '../enums';
+import { ScaleType, Axis } from '../enums';
 import { ChartService } from '../chart.service';
 
 
@@ -43,7 +43,11 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
     }
 
     render(data: any) {
+   const line = this.chart.d3.line()
+            .x((d: any) => this.chart.xscale(d.text))
+            .y((d: any) => this.chart.yscale(d.value));
 
+      
         this.chart
             .SVG(this.target.nativeElement)
             .Scale(ScaleType.Time, Axis.x)
@@ -54,6 +58,6 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
             .RangeRound(Axis.y)
             .Domain(Axis.y, this.chart.d3.extent(data, (d: any) => d.value))
             .Axis(Axis.y)
-            .Line(data, ColName.text, ColName.value);
+            .Line(data, line);
     }
 }
