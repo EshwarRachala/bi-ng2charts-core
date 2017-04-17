@@ -43,20 +43,22 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
     }
 
     render(data: any) {
-   const line = this.chart.d3.line()
+        const d3 = this.chart.d3;
+
+        const line = d3.line()
             .x((d: any) => this.chart.xscale(d.text))
             .y((d: any) => this.chart.yscale(d.value));
 
-      
+
         this.chart
             .SVG(this.target.nativeElement)
             .Scale(ScaleType.Time, Axis.x)
             .RangeRound(Axis.x)
-            .Domain(Axis.x, this.chart.d3.extent(data, (d: any) => d.text))
+            .Domain(Axis.x, d3.extent(data, (d: any) => d.text))
             .Axis(Axis.x)
             .Scale(ScaleType.Linear, Axis.y)
             .RangeRound(Axis.y)
-            .Domain(Axis.y, this.chart.d3.extent(data, (d: any) => d.value))
+            .Domain(Axis.y, d3.extent(data, (d: any) => d.value))
             .Axis(Axis.y)
             .Line(data, line);
     }

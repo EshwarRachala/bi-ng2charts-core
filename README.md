@@ -47,7 +47,7 @@ import {ChartsModule, ChartService } from 'ng2charts'
 
     constructor(chartService: ChartService) {
         this.chart = chartService;
-        this.d3 = this.chart.D3Module();
+        this.d3 = this.chart.d3;
     }
 
     const line = this.chart.d3.line()

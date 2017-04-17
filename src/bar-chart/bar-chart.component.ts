@@ -35,11 +35,14 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
 
     render(data: any) {
 
+        const d3 = this.chart.d3;
+
+
         this.chart
             .SVG(this.target.nativeElement)
             .Scale(ScaleType.Linear, Axis.x)
             .Range(Axis.x)
-            .Domain(Axis.x, this.chart.d3.max(this.data, (d: any) => d.value))
+            .Domain(Axis.x, d3.max(this.data, (d: any) => d.value))
             .Axis(Axis.x)
             .Scale(ScaleType.Band, Axis.y)
             .Range(Axis.y)
