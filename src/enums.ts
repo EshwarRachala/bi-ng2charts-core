@@ -1,7 +1,10 @@
 export enum ScaleType {
     Linear = 1,
     Band = 2,
-    Time = 3
+    Time = 3,
+    Power = 4,
+    Ordinal = 5,
+    Log = 6
 }
 
 export enum Axis {
