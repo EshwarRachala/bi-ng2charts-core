@@ -1,5 +1,11 @@
+import * as d3Selection from 'd3-selection';
+
+/// <reference types = 'd3-selection' />
+/// <reference types = 'd3-transition' />
+/// <reference types = 'd3-shape' />
+
 import { Injectable } from '@angular/core';
-import * as d3 from "d3";
+import * as d3 from 'd3';
 import { ScaleType, Axis, ColName } from './enums';
 
 /**
@@ -10,15 +16,15 @@ import { ScaleType, Axis, ColName } from './enums';
  */
 @Injectable()
 export class ChartService {
+
     public d3: typeof d3;
     public htmlElement: HTMLElement;
     public svg: any;
     public width: number;
     public height: number;
-    public margin: any;
+    public margin: { top: number; right: number; bottom: number; left: number; };
     public xscale: any = d3.scaleLinear();
     public yscale: any = d3.scaleLinear();
-
 
     /**
      * Creates an instance of ChartService.
@@ -52,7 +58,6 @@ export class ChartService {
             .append('g')
             .attr('transform', 'translate(' +
             this.margin.left + ',' + this.margin.top + ')');
-
 
         return this;
     }
@@ -216,7 +221,7 @@ export class ChartService {
     public Line(data: any[], line: any) {
 
         this.svg
-        .append('path')
+            .append('path')
             .data([data])
             .attr('class', 'line')
             .attr("fill", "none")
@@ -240,8 +245,9 @@ export class ChartService {
     public Axis(axis: Axis) {
         switch (axis) {
             case Axis.x:
+
                 this.svg
-                .append('g')
+                    .append('g')
                     .attr('class', 'x axis')
                     .attr('transform', `translate(0,${this.height})`)
                     .call(d3.axisBottom(this.xscale))
@@ -250,10 +256,13 @@ export class ChartService {
                     .style('text-anchor', 'end')
                     .attr('dx', '-.8em')
                     .attr('dy', '.15em');
+
                 break;
+
             case Axis.y:
+
                 this.svg
-                .append('g')
+                    .append('g')
                     .attr('class', 'y axis')
                     .call(d3.axisLeft(this.yscale))
                     .selectAll('text')
@@ -261,6 +270,7 @@ export class ChartService {
                     .style('text-anchor', 'end')
                     .attr('dx', '-.8em')
                     .attr('dy', '.15em');
+
                 break;
         }
 

@@ -34,6 +34,8 @@
   },
   "dependencies": {
     "@types/d3": "4.7.0",
+    "@types/d3-scale": "1.0.8",
+    "@types/d3-selection": "1.0.15",
     "d3": "4.7.4"
   },
   "devDependencies": {

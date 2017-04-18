@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, AfterViewInit, ViewChild }
     from '@angular/core';
-import { ScaleType, Axis } from '../enums';
+import { ScaleType, Axis, DataType } from '../enums';
 import { ChartService } from '../chart.service';
 
 
@@ -13,8 +13,8 @@ import { ChartService } from '../chart.service';
 
 export class LineChartComponent implements OnChanges, AfterViewInit {
 
-    @Input() settings: any = {};
-    @Input() data: Array<{ text: string, value: number }>;
+    @Input() settings: { fill: string };
+    @Input() data: Array<DataType>;
     @ViewChild('target') target: any;
 
     public chart: ChartService;
@@ -42,23 +42,23 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
 
     }
 
-    render(data: any) {
+    render(data: Array<DataType>) {
         const d3 = this.chart.d3;
 
-        const line = d3.line()
-            .x((d: any) => this.chart.xscale(d.text))
-            .y((d: any) => this.chart.yscale(d.value));
+        const line = d3.line<DataType>()
+            .x(d => this.chart.xscale(d.text))
+            .y(d => this.chart.yscale(d.value));
 
 
         this.chart
             .SVG(this.target.nativeElement)
             .Scale(ScaleType.Time, Axis.x)
             .RangeRound(Axis.x)
-            .Domain(Axis.x, d3.extent(data, (d: any) => d.text))
+            .Domain(Axis.x, d3.extent<DataType>(data, d => d.text))
             .Axis(Axis.x)
             .Scale(ScaleType.Linear, Axis.y)
             .RangeRound(Axis.y)
-            .Domain(Axis.y, d3.extent(data, (d: any) => d.value))
+            .Domain(Axis.y, d3.extent<DataType>(data, d => d.value))
             .Axis(Axis.y)
             .Line(data, line);
     }

@@ -17,3 +17,5 @@ export enum ColName {
     text = 1,
     value = 2
 }
+
+export type DataType = { text: any, value: any };
