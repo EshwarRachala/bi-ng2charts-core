@@ -1,9 +1,3 @@
-import * as d3Selection from 'd3-selection';
-
-/// <reference types = 'd3-selection' />
-/// <reference types = 'd3-transition' />
-/// <reference types = 'd3-shape' />
-
 import { Injectable } from '@angular/core';
 import * as d3 from 'd3';
 import { ScaleType, Axis, ColName } from './enums';
@@ -44,7 +38,7 @@ export class ChartService {
      * 
      * @memberOf ChartService
      */
-    SVG(element: any) {
+    SVG(element: HTMLElement) {
 
         this.htmlElement = element;
         this.width = this.htmlElement.clientWidth - this.margin.left - this.margin.right;
@@ -60,6 +54,24 @@ export class ChartService {
             this.margin.left + ',' + this.margin.top + ')');
 
         return this;
+    }
+
+    createSvg(element: HTMLElement): typeof d3 {
+        this.htmlElement = element;
+        this.width = this.htmlElement.clientWidth - this.margin.left - this.margin.right;
+        this.height = this.htmlElement.clientWidth * 0.5 - this.margin.top - this.margin.bottom;
+
+        let svg = d3
+            .select(this.htmlElement)
+            .append('svg')
+            .attr('width', this.width + this.margin.left + this.margin.right)
+            .attr('height', this.height + this.margin.top + this.margin.bottom)
+            .append('g')
+            .attr('transform', 'translate(' +
+            this.margin.left + ',' + this.margin.top + ')');
+
+        this.svg = svg;
+        return svg;
     }
 
     /**

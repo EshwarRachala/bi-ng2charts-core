@@ -38,9 +38,7 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
         // Reference d3 
         const d3 = this.chart.d3;
 
-        // Create svg
-        this.chart
-            .SVG(this.target.nativeElement);
+        let svg = this.chart.createSvg(this.target.nativeElement);
 
         // Create x Axis
         this.chart
@@ -57,8 +55,7 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
             .Axis(Axis.y);
 
         // Crete bar
-        this.chart.svg
-            .selectAll('.bar')
+        svg.selectAll('.bar')
             .data(data)
             .enter()
             .append('rect')

@@ -61,5 +61,6 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
             .Domain(Axis.y, d3.extent<DataType>(data, d => d.value))
             .Axis(Axis.y)
             .Line(data, line);
+
     }
 }
