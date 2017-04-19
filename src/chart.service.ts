@@ -40,7 +40,7 @@ export class ChartService {
      * 
      * @memberOf ChartService
      */
-    public SVG(element: ContainerElement) {
+    public Svg(element: ContainerElement) {
 
         this.htmlElement = element;
         this.host = d3.select(this.htmlElement);
@@ -70,7 +70,7 @@ export class ChartService {
      * 
      * @memberOf ChartService
      */
-    public Scale(type: ScaleType, axis: Axis) {
+    public scale(type: ScaleType, axis: Axis) {
 
         let scl: any;
 
@@ -106,7 +106,7 @@ export class ChartService {
      * 
      * @memberOf ChartService
      */
-    public Range(axis: Axis) {
+    public range(axis: Axis) {
 
         switch (axis) {
             case Axis.x:
@@ -128,7 +128,7 @@ export class ChartService {
      * 
      * @memberOf ChartService
      */
-    public RangeRound(axis: Axis) {
+    public rangeRound(axis: Axis) {
 
         switch (axis) {
             case Axis.x:
@@ -151,7 +151,7 @@ export class ChartService {
      * 
      * @memberOf ChartService
      */
-    public Domain(axis: Axis, func: any) {
+    public domain(axis: Axis, func: any) {
         if (typeof (func) === "number") {
             switch (axis) {
                 case Axis.x:
@@ -188,7 +188,7 @@ export class ChartService {
      * 
      * @memberOf ChartService
      */
-    public HorizontalBar(data: any[], xval: ColName, yval: ColName) {
+    public bar(data: any[], xval: ColName, yval: ColName) {
 
         this.svg
             .selectAll('.bar')
@@ -217,7 +217,7 @@ export class ChartService {
      * 
      * @memberOf ChartService
      */
-    public Line(data: any[], line: any) {
+    public line(data: any[], line: any) {
 
         this.svg
             .append('path')
@@ -241,7 +241,7 @@ export class ChartService {
      * 
      * @memberOf ChartService
      */
-    public Axis(axis: Axis) {
+    public axis(axis: Axis) {
         switch (axis) {
             case Axis.x:
 

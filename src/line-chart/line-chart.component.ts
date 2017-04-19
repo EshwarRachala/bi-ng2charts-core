@@ -49,18 +49,18 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
             .x(d => this.chart.xscale(d.text))
             .y(d => this.chart.yscale(d.value));
 
-
+        
         this.chart
-            .SVG(this.target.nativeElement)
-            .Scale(ScaleType.Time, Axis.x)
-            .RangeRound(Axis.x)
-            .Domain(Axis.x, d3.extent<DataType>(data, d => d.text))
-            .Axis(Axis.x)
-            .Scale(ScaleType.Linear, Axis.y)
-            .RangeRound(Axis.y)
-            .Domain(Axis.y, d3.extent<DataType>(data, d => d.value))
-            .Axis(Axis.y)
-            .Line(data, line);
+            .Svg(this.target.nativeElement)
+            .scale(ScaleType.Time, Axis.x)
+            .rangeRound(Axis.x)
+            .domain(Axis.x, d3.extent<DataType>(data, d => d.text))
+            .axis(Axis.x)
+            .scale(ScaleType.Linear, Axis.y)
+            .rangeRound(Axis.y)
+            .domain(Axis.y, d3.extent<DataType>(data, d => d.value))
+            .axis(Axis.y)
+            .line(data, line);
 
     }
 }

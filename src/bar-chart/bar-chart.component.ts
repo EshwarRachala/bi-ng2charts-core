@@ -38,24 +38,23 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
         // Reference d3 
         const d3 = this.chart.d3;
 
-        this.chart.SVG(this.target.nativeElement);
+        this.chart.Svg(this.target.nativeElement);
 
         // Create x Axis
         this.chart
-            .Scale(ScaleType.Linear, Axis.x)
-            .Range(Axis.x)
-            .Domain(Axis.x, d3.max<DataType>(data, d => d.value))
-            .Axis(Axis.x);
+            .scale(ScaleType.Linear, Axis.x)
+            .range(Axis.x)
+            .domain(Axis.x, d3.max<DataType>(data, d => d.value))
+            .axis(Axis.x);
 
         // Create y axis
         this.chart
-            .Scale(ScaleType.Band, Axis.y)
-            .Range(Axis.y)
-            .Domain(Axis.y, data.map<DataType>(d => d.text))
-            .Axis(Axis.y);
+            .scale(ScaleType.Band, Axis.y)
+            .range(Axis.y)
+            .domain(Axis.y, data.map<DataType>(d => d.text))
+            .axis(Axis.y);
 
         // Crete bar
-
         this.chart.svg
             .selectAll('.bar')
             .data(data)
