@@ -56,7 +56,7 @@ export class ChartService {
         return this;
     }
 
-    createSvg(element: HTMLElement): typeof d3 {
+    createSvg(element: HTMLElement): any {
         this.htmlElement = element;
         this.width = this.htmlElement.clientWidth - this.margin.left - this.margin.right;
         this.height = this.htmlElement.clientWidth * 0.5 - this.margin.top - this.margin.bottom;
