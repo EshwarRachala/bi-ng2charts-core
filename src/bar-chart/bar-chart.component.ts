@@ -55,7 +55,9 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
             .Axis(Axis.y);
 
         // Crete bar
-        this.chart.svg.selectAll('.bar')
+
+        this.chart.svg
+            .selectAll('.bar')
             .data(data)
             .enter()
             .append('rect')

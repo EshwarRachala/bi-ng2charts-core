@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as d3 from 'd3';
 import { ScaleType, Axis, ColName } from './enums';
+import { ContainerElement } from "@types/d3-selection";
 
 /**
  * 
@@ -12,9 +13,9 @@ import { ScaleType, Axis, ColName } from './enums';
 export class ChartService {
 
     public d3: typeof d3;
-    public htmlElement: HTMLElement;
-    private host: any;
-    public svg: any;
+    public htmlElement: ContainerElement;
+    private host: d3.Selection<ContainerElement, any, any, any>;
+    public svg: d3.Selection<ContainerElement, any, any, any>;
     public width: number;
     public height: number;
     public margin: { top: number; right: number; bottom: number; left: number; };
@@ -39,7 +40,7 @@ export class ChartService {
      * 
      * @memberOf ChartService
      */
-    public SVG(element: HTMLElement) {
+    public SVG(element: ContainerElement) {
 
         this.htmlElement = element;
         this.host = d3.select(this.htmlElement);
@@ -47,7 +48,7 @@ export class ChartService {
         this.width = this.htmlElement.clientWidth - this.margin.left - this.margin.right;
         this.height = this.htmlElement.clientWidth * 0.5 - this.margin.top - this.margin.bottom;
 
-        this.svg = this.host
+        this.host
             .append('svg')
             .attr('width', this.width + this.margin.left + this.margin.right)
             .attr('height', this.height + this.margin.top + this.margin.bottom)
@@ -55,6 +56,7 @@ export class ChartService {
             .attr('transform', 'translate(' +
             this.margin.left + ',' + this.margin.top + ')');
 
+        this.svg = this.host;
 
         return this;
     }
