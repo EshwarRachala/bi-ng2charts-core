@@ -13,6 +13,7 @@ export class ChartService {
 
     public d3: typeof d3;
     public htmlElement: HTMLElement;
+    private host: any;
     public svg: any;
     public width: number;
     public height: number;
@@ -38,40 +39,24 @@ export class ChartService {
      * 
      * @memberOf ChartService
      */
-    SVG(element: HTMLElement) {
+    public SVG(element: HTMLElement) {
 
         this.htmlElement = element;
+        this.host = d3.select(this.htmlElement);
+        this.host.html('');
         this.width = this.htmlElement.clientWidth - this.margin.left - this.margin.right;
         this.height = this.htmlElement.clientWidth * 0.5 - this.margin.top - this.margin.bottom;
 
-        this.svg = d3
-            .select(this.htmlElement)
+        this.svg = this.host
             .append('svg')
             .attr('width', this.width + this.margin.left + this.margin.right)
             .attr('height', this.height + this.margin.top + this.margin.bottom)
             .append('g')
             .attr('transform', 'translate(' +
             this.margin.left + ',' + this.margin.top + ')');
+
 
         return this;
-    }
-
-    createSvg(element: HTMLElement): any {
-        this.htmlElement = element;
-        this.width = this.htmlElement.clientWidth - this.margin.left - this.margin.right;
-        this.height = this.htmlElement.clientWidth * 0.5 - this.margin.top - this.margin.bottom;
-
-        let svg = d3
-            .select(this.htmlElement)
-            .append('svg')
-            .attr('width', this.width + this.margin.left + this.margin.right)
-            .attr('height', this.height + this.margin.top + this.margin.bottom)
-            .append('g')
-            .attr('transform', 'translate(' +
-            this.margin.left + ',' + this.margin.top + ')');
-
-        this.svg = svg;
-        return svg;
     }
 
     /**

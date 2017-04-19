@@ -24,10 +24,10 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
     }
 
     ngOnChanges(changes: any): void {
-        // tslint:disable-next-line:curly
-        if (!changes.data) return;
-        this.data = changes.data.currentValue;
-        this.render(this.data);
+        if (changes.data) {
+            this.data = changes.data.currentValue;
+            this.render(this.data);
+        }
     }
 
     ngAfterViewInit() {
@@ -38,7 +38,7 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
         // Reference d3 
         const d3 = this.chart.d3;
 
-        let svg = this.chart.createSvg(this.target.nativeElement);
+        this.chart.SVG(this.target.nativeElement);
 
         // Create x Axis
         this.chart
@@ -55,7 +55,7 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
             .Axis(Axis.y);
 
         // Crete bar
-        svg.selectAll('.bar')
+        this.chart.svg.selectAll('.bar')
             .data(data)
             .enter()
             .append('rect')
