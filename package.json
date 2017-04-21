@@ -1,5 +1,5 @@
 {
-  "name": "ng2charts",
+  "name": "@bi/charts",
   "private": false,
   "version": "2.1.0",
   "description": "d3 angular components",

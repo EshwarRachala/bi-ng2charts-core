@@ -19,9 +19,9 @@ module.exports = {
     output: {
         path: helpers.root('bundles'),
         publicPath: '/',
-        filename: 'core.umd.js',
-        library: 'ng2charts',
-        libraryTarget: 'umd'
+        filename: 'core.common.js',
+        library: 'bicharts',
+        libraryTarget: 'commonjs'
     },
     externals: [/^\@angular\//, /^rxjs\//],
     module: {
