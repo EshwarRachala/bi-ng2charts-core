@@ -24,7 +24,8 @@ module.exports = {
                 exclude: [
                     // these packages have problems with their sourcemaps
                     helpers.root('node_modules/rxjs'),
-                    helpers.root('node_modules/@angular')
+                    helpers.root('node_modules/@angular'),
+                    helpers.root('demo')
                 ]
             },
             {
@@ -40,19 +41,20 @@ module.exports = {
                     },
                     'angular2-template-loader'
                 ],
-                exclude: [/\.e2e\.ts$/]
+                exclude: [/\.e2e\.ts$/,/demo/]
             },
             {
                 enforce: 'post',
                 test: /\.(js|ts)$/,
                 loader: 'istanbul-instrumenter-loader',
                 include: helpers.root('src'),
-                exclude: [/\.spec\.ts$/, /\.e2e\.ts$/, /node_modules/]
+                exclude: [/\.spec\.ts$/, /\.e2e\.ts$/, /node_modules/,/demo/]
             },
             {
                 test: /\.(html|css)$/,
                 loader: 'raw-loader',
-                exclude: [helpers.root('src/index.html')]
+                exclude: [helpers.root('src/index.html'),
+                helpers.root('demo')]
             }
         ]
     },
