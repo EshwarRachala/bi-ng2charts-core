@@ -28,7 +28,7 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
         if (!changes.data) return;
         this.data = changes.data.currentValue;
 
-        const format = this.chart.d3.timeParse("%d-%b-%y");
+        const format = this.chart._d3.timeParse("%d-%b-%y");
 
         this.data.forEach((d: any) => {
             d.text = format(d.text);
@@ -43,11 +43,11 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
     }
 
     render(data: Array<DataType>) {
-        const d3 = this.chart.d3;
+        const d3 = this.chart._d3;
 
         const line = d3.line<DataType>()
-            .x(d => this.chart.xscale(d.text))
-            .y(d => this.chart.yscale(d.value));
+            .x(d => this.chart._xscale(d.text))
+            .y(d => this.chart._yscale(d.value));
 
         
         this.chart

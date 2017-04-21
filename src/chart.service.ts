@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as d3 from 'd3';
 import { ScaleType, Axis, ColName } from './enums';
-import { ContainerElement } from "@types/d3-selection";
 
 /**
  * 
@@ -12,15 +11,14 @@ import { ContainerElement } from "@types/d3-selection";
 @Injectable()
 export class ChartService {
 
-    public d3: typeof d3;
-    public htmlElement: ContainerElement;
-    private host: d3.Selection<ContainerElement, any, any, any>;
-    public svg: d3.Selection<ContainerElement, any, any, any>;
-    public width: number;
-    public height: number;
-    public margin: { top: number; right: number; bottom: number; left: number; };
-    public xscale: any = d3.scaleLinear();
-    public yscale: any = d3.scaleLinear();
+    public _d3: typeof d3;
+    private _htmlElement: HTMLElement;
+    public _svg: d3.Selection<HTMLElement, any, any, any>;
+    public _width: number;
+    public _height: number;
+    public _margin: { top: number; right: number; bottom: number; left: number; };
+    public _xscale: any = d3.scaleLinear();
+    public _yscale: any = d3.scaleLinear();
 
     /**
      * Creates an instance of ChartService.
@@ -28,8 +26,8 @@ export class ChartService {
      * @memberOf ChartService
      */
     constructor() {
-        this.margin = { top: 20, right: 20, bottom: 70, left: 70 };
-        this.d3 = d3;
+        this._margin = { top: 20, right: 20, bottom: 70, left: 70 };
+        this._d3 = d3;
     }
 
     /**
@@ -40,23 +38,21 @@ export class ChartService {
      * 
      * @memberOf ChartService
      */
-    public Svg(element: ContainerElement) {
+    public Svg(element: HTMLElement) {
 
-        this.htmlElement = element;
-        this.host = d3.select(this.htmlElement);
-        this.host.html('');
-        this.width = this.htmlElement.clientWidth - this.margin.left - this.margin.right;
-        this.height = this.htmlElement.clientWidth * 0.5 - this.margin.top - this.margin.bottom;
+        this._htmlElement = element;
+        this._svg = d3.select(this._htmlElement);
+        this._svg.html('');
+        this._width = this._htmlElement.clientWidth - this._margin.left - this._margin.right;
+        this._height = this._htmlElement.clientWidth * 0.5 - this._margin.top - this._margin.bottom;
 
-        this.host
+        this._svg
             .append('svg')
-            .attr('width', this.width + this.margin.left + this.margin.right)
-            .attr('height', this.height + this.margin.top + this.margin.bottom)
+            .attr('width', this._width + this._margin.left + this._margin.right)
+            .attr('height', this._height + this._margin.top + this._margin.bottom)
             .append('g')
             .attr('transform', 'translate(' +
-            this.margin.left + ',' + this.margin.top + ')');
-
-        this.svg = this.host;
+            this._margin.left + ',' + this._margin.top + ')');
 
         return this;
     }
@@ -88,10 +84,10 @@ export class ChartService {
 
         switch (axis) {
             case Axis.x:
-                this.xscale = scl;
+                this._xscale = scl;
                 break;
             case Axis.y:
-                this.yscale = scl;
+                this._yscale = scl;
                 break;
         }
 
@@ -110,10 +106,10 @@ export class ChartService {
 
         switch (axis) {
             case Axis.x:
-                this.xscale.range([0, this.width]);
+                this._xscale.range([0, this._width]);
                 break;
             case Axis.y:
-                this.yscale.range([this.height, 0]);
+                this._yscale.range([this._height, 0]);
                 break;
         }
 
@@ -132,10 +128,10 @@ export class ChartService {
 
         switch (axis) {
             case Axis.x:
-                this.xscale.rangeRound([0, this.width]);
+                this._xscale.rangeRound([0, this._width]);
                 break;
             case Axis.y:
-                this.yscale.rangeRound([this.height, 0]);
+                this._yscale.rangeRound([this._height, 0]);
                 break;
         }
 
@@ -155,21 +151,21 @@ export class ChartService {
         if (typeof (func) === "number") {
             switch (axis) {
                 case Axis.x:
-                    this.xscale.domain([0, func]);
+                    this._xscale.domain([0, func]);
                     break;
 
                 case Axis.y:
-                    this.yscale.domain([0, func]);
+                    this._yscale.domain([0, func]);
                     break;
             }
         } else {
             switch (axis) {
                 case Axis.x:
-                    this.xscale.domain(func);
+                    this._xscale.domain(func);
                     break;
 
                 case Axis.y:
-                    this.yscale.domain(func);
+                    this._yscale.domain(func);
                     break;
 
             }
@@ -190,17 +186,17 @@ export class ChartService {
      */
     public bar(data: any[], xval: ColName, yval: ColName) {
 
-        this.svg
+        this._svg
             .selectAll('.bar')
             .data(data)
             .enter()
             .append('rect')
             .attr('class', 'bar')
-            .attr('y', (d: any) => this.yscale(
+            .attr('y', (d: any) => this._yscale(
                 (yval === ColName.text) ? d.text : d.value
             ))
-            .attr('height', this.yscale.bandwidth())
-            .attr('width', (d: any) => this.xscale(
+            .attr('height', this._yscale.bandwidth())
+            .attr('width', (d: any) => this._xscale(
                 (xval === ColName.text) ? d.text : d.value
             ));
 
@@ -219,7 +215,7 @@ export class ChartService {
      */
     public line(data: any[], line: any) {
 
-        this.svg
+        this._svg
             .append('path')
             .data([data])
             .attr('class', 'line')
@@ -245,11 +241,11 @@ export class ChartService {
         switch (axis) {
             case Axis.x:
 
-                this.svg
+                this._svg
                     .append('g')
                     .attr('class', 'x axis')
-                    .attr('transform', `translate(0,${this.height})`)
-                    .call(d3.axisBottom(this.xscale))
+                    .attr('transform', `translate(0,${this._height})`)
+                    .call(d3.axisBottom(this._xscale))
                     .selectAll('text')
                     .style('font-size', '12px')
                     .style('text-anchor', 'end')
@@ -260,10 +256,10 @@ export class ChartService {
 
             case Axis.y:
 
-                this.svg
+                this._svg
                     .append('g')
                     .attr('class', 'y axis')
-                    .call(d3.axisLeft(this.yscale))
+                    .call(d3.axisLeft(this._yscale))
                     .selectAll('text')
                     .style('font-size', '12px')
                     .style('text-anchor', 'end')

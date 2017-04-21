@@ -34,9 +34,9 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
     }
 
     render(data: Array<DataType>) {
-
+        debugger;
         // Reference d3 
-        const d3 = this.chart.d3;
+        const d3 = this.chart._d3;
 
         this.chart.Svg(this.target.nativeElement);
 
@@ -55,14 +55,14 @@ export class BarChartComponent implements OnChanges, AfterViewInit {
             .axis(Axis.y);
 
         // Crete bar
-        this.chart.svg
+        this.chart._svg
             .selectAll('.bar')
             .data(data)
             .enter()
             .append('rect')
             .attr('class', 'bar')
-            .attr('y', (d: DataType) => this.chart.yscale(d.text))
-            .attr('height', this.chart.yscale.bandwidth())
-            .attr('width', (d: DataType) => this.chart.xscale(d.value));
+            .attr('y', (d: DataType) => this.chart._yscale(d.text))
+            .attr('height', this.chart._yscale.bandwidth())
+            .attr('width', (d: DataType) => this.chart._xscale(d.value));
     }
 }
