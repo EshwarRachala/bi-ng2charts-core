@@ -30,7 +30,8 @@
     ],
     "angularCompilerOptions": {
         "strictMetadataEmit": true,
-        "skipTemplateCodegen": true
+        "skipTemplateCodegen": true,
+        "debug": true
     },
     "awesomeTypeScriptLoaderOptions": {
         "useWebpackText": true
