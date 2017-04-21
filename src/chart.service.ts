@@ -11,7 +11,7 @@ import { ScaleType, Axis, ColName } from './enums';
 @Injectable()
 export class ChartService {
 
-    public _d3: typeof d3;
+    public _d3 = d3;
     private _htmlElement: HTMLElement;
     public _svg: d3.Selection<HTMLElement, any, any, any>;
     public _width: number;
@@ -27,7 +27,6 @@ export class ChartService {
      */
     constructor() {
         this._margin = { top: 20, right: 20, bottom: 70, left: 70 };
-        this._d3 = d3;
     }
 
     /**
