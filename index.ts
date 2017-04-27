@@ -3,8 +3,6 @@ import { D3Service } from './src/d3.service';
 
 export * from './src/d3.service';
 
-export * from './src/d3';
-
 
 @NgModule({
   imports: [],
