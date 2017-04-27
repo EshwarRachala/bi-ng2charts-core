@@ -1,4 +1,4 @@
-const helpers = require('./helpers'),
+var helpers = require('./helpers'),
     webpack = require('webpack'),
     LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 
@@ -41,20 +41,21 @@ module.exports = {
                     },
                     'angular2-template-loader'
                 ],
-                exclude: [/\.e2e\.ts$/,/demo/]
+                exclude: [/\.e2e\.ts$/, /demo/]
             },
             {
                 enforce: 'post',
                 test: /\.(js|ts)$/,
                 loader: 'istanbul-instrumenter-loader',
                 include: helpers.root('src'),
-                exclude: [/\.spec\.ts$/, /\.e2e\.ts$/, /node_modules/,/demo/]
+                exclude: [/\.spec\.ts$/, /\.e2e\.ts$/, /node_modules/, /demo/]
             },
             {
                 test: /\.(html|css)$/,
                 loader: 'raw-loader',
                 exclude: [helpers.root('src/index.html'),
-                helpers.root('demo')]
+                    helpers.root('demo')
+                ]
             }
         ]
     },

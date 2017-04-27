@@ -1,11 +1,10 @@
-const helpers = require('./config/helpers'),
-    webpack = require('webpack'),
-    CleanWebpackPlugin = require('clean-webpack-plugin'),
-    {
-        CheckerPlugin,
-        TsConfigPathsPlugin
-    } = require('awesome-typescript-loader');
-
+const helpers = require('./config/helpers');
+const webpack = require('webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const {
+    CheckerPlugin,
+    TsConfigPathsPlugin
+} = require('awesome-typescript-loader');
 const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');

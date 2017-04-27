@@ -6,7 +6,7 @@
  */
 
 declare module jasmine {
-    interface Matchers {
+    interface Matchers<T> {
         toHaveText(text: string): boolean;
         toContainText(text: string): boolean;
     }
@@ -15,9 +15,9 @@ declare module jasmine {
 beforeEach(() => {
     jasmine.addMatchers({
 
-        toHaveText: function() {
+        toHaveText: function () {
             return {
-                compare: function(actual, expectedText) {
+                compare: function (actual, expectedText) {
                     let actualText = actual.textContent;
                     return {
                         pass: actualText === expectedText,
@@ -29,9 +29,9 @@ beforeEach(() => {
             };
         },
 
-        toContainText: function() {
+        toContainText: function () {
             return {
-                compare: function(actual, expectedText) {
+                compare: function (actual, expectedText) {
                     let actualText = actual.textContent;
                     return {
                         pass: actualText.indexOf(expectedText) > -1,

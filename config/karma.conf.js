@@ -1,4 +1,4 @@
-module.exports = function(config) {
+module.exports = function (config) {
     var testWebpackConfig = require('./webpack.test.js');
 
     var configuration = {
@@ -14,9 +14,14 @@ module.exports = function(config) {
          *
          * we are building the test environment in ./spec-bundle.js
          */
-        files: [ { pattern: './config/spec-bundle.js', watched: false } ],
+        files: [{
+            pattern: './config/spec-bundle.js',
+            watched: false
+        }],
 
-        preprocessors: { './config/spec-bundle.js': ['coverage', 'webpack', 'sourcemap'] },
+        preprocessors: {
+            './config/spec-bundle.js': ['coverage', 'webpack', 'sourcemap']
+        },
 
         // Webpack Config at ./webpack.test.js
         webpack: testWebpackConfig,
@@ -32,9 +37,11 @@ module.exports = function(config) {
         },
 
         // Webpack please don't spam the console when running in karma!
-        webpackMiddleware: { stats: 'errors-only'},
+        webpackMiddleware: {
+            stats: 'errors-only'
+        },
 
-        reporters: [ 'mocha', 'coverage', 'remap-coverage' ],
+        reporters: ['mocha', 'coverage', 'remap-coverage'],
 
         mochaReporter: {
             ignoreSkipped: true
@@ -67,7 +74,7 @@ module.exports = function(config) {
         singleRun: true
     };
 
-    if (process.env.TRAVIS){
+    if (process.env.TRAVIS) {
         configuration.browsers = [
             'ChromeTravisCi'
         ];
