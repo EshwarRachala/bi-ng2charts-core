@@ -29,14 +29,14 @@ module.exports = {
             test: /\.ts$/,
             loader: 'tslint-loader',
             include: [helpers.root('src')],
-            exclude: [helpers.root('node_modules')]
+            exclude: [helpers.root('node_modules'), helpers.root('demo')]
         }, {
             test: /\.ts$/,
             loader: 'awesome-typescript-loader',
             options: {
                 declaration: false
             },
-            exclude: [/\.spec\.ts$/]
+            exclude: [/\.spec\.ts$/, helpers.root('demo')]
         }]
     },
 
