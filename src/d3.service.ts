@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core';
-import * as d3 from 'd3';
+import * as d3 from './bundle-d3';
 
+export type D3 = typeof d3;
 
 @Injectable()
 export class D3Service {
-    public width: number;
-    public height: number;
-    public margin: { top: number; right: number; bottom: number; left: number; };
 
     constructor() { }
 
-    d3Module() {
+    public getD3(): D3 {
         return d3;
     }
 
