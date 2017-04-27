@@ -16,7 +16,7 @@
         "moduleResolution": "node",
         "noUnusedLocals": true,
         "baseUrl": "types",
-        "types": ["hammerjs", "jasmine", "node", "d3"],
+        "types": ["hammerjs", "jasmine", "node"],
         "typeRoots": ["types"],
         "lib": ["es2015", "dom"]
     },
